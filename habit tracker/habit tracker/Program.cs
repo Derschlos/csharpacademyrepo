@@ -5,55 +5,141 @@ namespace Variables
     class Program
     {
         static void Main(string[] args)
-        {   
-            const string connectionString = @"Data Source=.\\habit-Tracker.db";
-            var con = new SqliteConnection(connectionString);
-            using (con)
-            {
-                var tableCmd = con.CreateCommand();
-                using (tableCmd) 
-                {
-                    tableCmd.CommandText =
-                       @"CREATE TABLE IF NOT EXISTS yourHabit (
+        {
+            //creates the database if not allready existing
+            //const string connectionString = @"Data Source=.\\habit-Tracker.db";
+            //var con = new SqliteConnection(connectionString);
+            //using (con)
+            //{
+            //    var tableCmd = con.CreateCommand();
+            //    using (tableCmd) 
+            //    {
+            //        tableCmd.CommandText =
+            //           @"CREATE TABLE IF NOT EXISTS yourHabit (
+            //                Id INTEGER PRIMARY KEY AUTOINCREMENT,
+            //               Date TEXT,
+            //                Quantity INTEGER
+            //                )";
+            //        con.Open();
+            //        tableCmd.ExecuteNonQuery();
+            //        con.Close();
+            //    }
+            //}
+            var commandText = @"CREATE TABLE IF NOT EXISTS yourHabit (
                             Id INTEGER PRIMARY KEY AUTOINCREMENT,
-                           Date TEXT,
+                            Date TEXT,
                             Quantity INTEGER
                             )";
-                    con.Open();
-                    tableCmd.ExecuteNonQuery();
-                    con.Close();
+
+            executeSql(commandText, "r");
+            static byte userInputGenerator()
+            {
+                Console.WriteLine("What would you like to do?");
+                Console.WriteLine(" ");
+                Console.WriteLine("Type 1 to Close Application");
+                Console.WriteLine("Type 2 to view All Records");
+                Console.WriteLine("Type 3 to Insert Record");
+                Console.WriteLine("Type 4 to Delete Record");
+                Console.WriteLine("Type 5 to Update Record");
+                byte userInput = 0;
+                while (userInput < 1 || userInput > 5)
+                {
+                    try
+                    {
+                        userInput = Convert.ToByte(Console.ReadLine());
+
+                    }
+                    catch (Exception)
+                    {
+
+                        Console.WriteLine("Bitte eine Zahl eingeben");
+                    }
+                }
+                return userInput;
+            }
+
+            static void executeSql(string inputString, string readWrite)
+            {
+                const string connectionString = @"Data Source=.\\habit-Tracker.db";
+                //var outputString = "";
+                var con = new SqliteConnection(connectionString);
+                using (con)
+                {
+                    var tableCmd = con.CreateCommand();
+                    using (tableCmd)
+                    {
+                        tableCmd.CommandText = inputString;
+                        con.Open();
+                        switch (readWrite)
+                        { 
+                            case "w":
+                                {
+                                    tableCmd.ExecuteNonQuery();
+                                    break;
+                                }
+                            case "r":
+                                {
+                                    var reader = tableCmd.ExecuteReader();
+                                    while (reader.Read())
+                                    {
+                                        
+                                    }   
+                                    break;
+                                 
+                                }
+                        };
+                        //else 
+                        //{
+                        //    tableCmd.ExecuteNonQuery();
+                        //};
+                        //con.Close();
+                    }
                 }
             }
-            Console.WriteLine("What would you like to do?");
-            Console.WriteLine(" ");
-            Console.WriteLine("Type 1 to Close Application");
-            Console.WriteLine("Type 2 to view All Records");
-            Console.WriteLine("Type 3 to Insert Record");
-            Console.WriteLine("Type 4 to Delete Record");
-            Console.WriteLine("Type 5 to Update Record");
+
+            static void insert() 
+            {
+
+            }
+
             byte userInput = 0;
-            while (userInput == 0)
-                try
-                {
-                    userInput = Convert.ToByte(Console.ReadLine());
-                }
-                catch (Exception)
-                {
-
-                    Console.WriteLine("Bitte eine Zahl eingeben");
-                }
-            if (userInput == 1) 
+            var inputString = "";
+            while ((userInput = userInputGenerator()) != 1)
             {
-                System.Environment.Exit(0);
+                switch (userInput)
+                {
+                    case 1:
+                        Console.WriteLine("Haben Sie noch einen schönen Tag.");
+                        System.Environment.Exit(0);
+                        break;
+                    case 2:
+                        Console.WriteLine("in 2");
+                        //var inputString = 
+                        break;
+
+                    case 3:
+                        //Console.WriteLine("in 3");
+                        inputString = @"SELECT MAX(ID) FROM yourHabit";
+                        executeSql(inputString, "r");
+                        //inputString = @"INSERT INTO yourHabit (ID, Date, Quantity)
+                        //                VALUES ('2', '03.03.2022', '2')";
+                        //executeSql(inputString, "w");
+                        break;
+                    case 4:
+
+                        break;
+                    case 5:
+
+                        break;
+                    default:
+                        userInputGenerator();
+                        break;
+                }
             }
+
+
+            //Console.WriteLine(userInput);
             
-            Console.WriteLine(userInput);
-
-
-            static void request() 
-            {
-
-            }
 
             ///*Creating a connection passing the connection string as an argument
             //This will create the database for you, there's no need to manually create it.
