@@ -72,25 +72,9 @@ namespace Variables
             }
         }
 
-        static void insert()
+        static void insert()   //case 2
         {
-            int i = 0;
-            //Console.WriteLine("in 3");
-            inputString = @"SELECT MAX(ID) FROM yourHabit";
-            //inputString = @"SELECT * FROM yourHabit WHERE ID = 1";
-            outputObject = executeSql(inputString, "r");
-            var index = Convert.ToString(Convert.ToInt32(outputObject[0]) + 1);
-            Console.WriteLine("Inserting new entry with ID: " + index);
-            String date = DateTime.Now.ToShortDateString();
-            Console.WriteLine("Current Date is: " + date);
-            Console.WriteLine("Do you want to change the Date? (y/n)");
-            string changeDate = Console.ReadLine();
-            while (changeDate == "y")
-            {
-                String day = "";
-                String month = "";
-                String year = "";
-                static String checkDayMonthYear(String pattern, String uInput) 
+            static String checkDayMonthYear(String pattern, String uInput) 
                 {
                     Regex rgx = new Regex(pattern);
                     MatchCollection matches = rgx.Matches(uInput);
@@ -104,15 +88,50 @@ namespace Variables
                         return null;
                     }
                 }
+            int i = 0;
+            //Console.WriteLine("in 3");
+            String inputString = @"SELECT MAX(ID) FROM yourHabit";
+            //inputString = @"SELECT * FROM yourHabit WHERE ID = 1";
+            var outputObject = executeSql(inputString, "r");
+            var index = Convert.ToString(Convert.ToInt32(outputObject[0]) + 1);
+            Console.WriteLine("Inserting new entry with ID: " + index);
+            String date = DateTime.Now.ToShortDateString();
+            Console.WriteLine("Current Date is: " + date);
+            Console.WriteLine("Do you want to change the Date? (y/n)");
+            string changeDate = Console.ReadLine();
+            string breakChain = "break";
+            while (changeDate == "y")
+            {
                 Console.WriteLine("Please write the Date as dd.mm.yyyy:");
                 date = Console.ReadLine();
+                if (date.Contains(breakChain))
+                {
+                    date = DateTime.Now.ToShortDateString();
+                    break;
+                }
+                String day = "";
+                String month = "";
+                String year = "";
                 if (date.Length == 10)
                 {
-                    string pattern = @"\d\d[.-/ ]+";
-
+                    string pattern = @"\d\d(?=[.,/ \-]+\d\d[.,/ \\-]+\d{4})";
+                    day = checkDayMonthYear(pattern, date);
+                    pattern = @"(?<=[.,/\-])\d\d(?=[.,/\-]+\d{4})";
+                    month = checkDayMonthYear(pattern, date);
+                    pattern = @"(?<=[.,/\\-])\d{4}";
+                    year = checkDayMonthYear(pattern, date);
+                    Console.WriteLine(day);
+                    Console.WriteLine(month);
+                    Console.WriteLine(year);    
+                    date = $"{day}.{month}.{year}";
+                    if (Convert.ToInt32(day) <= 31 && Convert.ToInt32(month) <= 12)
+                    {
+                        break;
+                    }
+                    Console.WriteLine("Faulty input. Type (break) if you want to stop Input and use today as date.");
                 }
-
             }
+
         }
 
         static void Main(string[] args)
@@ -131,6 +150,7 @@ namespace Variables
                 {
                     case 0:
                         //Exit
+                        Console.Clear();
                         Console.WriteLine("Haben Sie noch einen schönen Tag.");
                         System.Environment.Exit(0);
                         break;
@@ -142,15 +162,17 @@ namespace Variables
 
                     case 2:
                         //Insert Record
-                        
+                        Console.Clear();
+
 
                         //Console.WriteLine("Please write the Date as dd.mm.yyyy:");
                         //String date = Console.ReadLine();
 
-                        Console.WriteLine(date);
+                        //Console.WriteLine(date);
 
-                        inputString = String.Format(@"INSERT INTO yourHabit (ID, Date, Quantity)
-                                        VALUES ('{0}', '03.03.2022', '{1}')", index , i + 1);
+                        //inputString = String.Format(@"INSERT INTO yourHabit (ID, Date, Quantity)
+                        //VALUES ('{0}', '03.03.2022', '{1}')", index , i + 1);
+                        insert();
                         
                         //outputObject = executeSql(inputString, "w");
                         break;
