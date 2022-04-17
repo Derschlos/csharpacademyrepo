@@ -72,7 +72,7 @@ namespace Variables
             }
         }
 
-        static void insert()   //case 2
+        static String getDate()   
         {
             static String checkDayMonthYear(String pattern, String uInput) 
                 {
@@ -131,6 +131,7 @@ namespace Variables
                     Console.WriteLine("Faulty input. Type (break) if you want to stop Input and use today as date.");
                 }
             }
+            return date
 
         }
 
@@ -163,16 +164,14 @@ namespace Variables
                     case 2:
                         //Insert Record
                         Console.Clear();
+                        var insertDate = getDate();
+                        Console.WriteLine(insertDate);
 
 
-                        //Console.WriteLine("Please write the Date as dd.mm.yyyy:");
-                        //String date = Console.ReadLine();
-
-                        //Console.WriteLine(date);
 
                         //inputString = String.Format(@"INSERT INTO yourHabit (ID, Date, Quantity)
                         //VALUES ('{0}', '03.03.2022', '{1}')", index , i + 1);
-                        insert();
+                        //insert();
                         
                         //outputObject = executeSql(inputString, "w");
                         break;
