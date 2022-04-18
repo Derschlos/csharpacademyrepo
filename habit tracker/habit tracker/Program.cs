@@ -207,7 +207,7 @@ namespace Variables
                         string quantInput = Console.ReadLine();
                         quantInput = checkRegex(@"\d+", quantInput);
                         inputString = $"UPDATE yourHabit SET Quantity = {quantInput} WHERE Id= {upInput}";
-                        executeSql("")
+                        executeSql(inputString, "w");
                         break;
                     default:
                         //Loop
