@@ -1,10 +1,8 @@
 ﻿using Microsoft.Data.Sqlite;
 using System.Globalization;
 using System.Text.RegularExpressions;
-
 namespace Variables
 {
-
     class Program
     {
         static int userInputGenerator(int userInput)
@@ -32,8 +30,6 @@ namespace Variables
             }
             return userInput;
         }
-
-
         static List<String> executeSql(string inputString, string readWrite)
         {
             const string connectionString = @"Data Source=.\\habit-Tracker.db";
@@ -78,7 +74,6 @@ namespace Variables
             if (matches.Count > 0)
             {
                 return matches[0].Value;
-
             }
             else
             {
@@ -93,9 +88,6 @@ namespace Variables
         }
         static String getDate()   
         {
-            var index = Convert.ToString(maxId() + 1);
-            Console.WriteLine("Inserting new entry with ID: " + index);
-
             String date = DateTime.Now.ToShortDateString();
             Console.WriteLine("Current Date is: " + date);
             Console.WriteLine("Do you want to change the Date? (y/n)");
@@ -132,9 +124,7 @@ namespace Variables
             }
             Console.Clear();
             return date;
-
         }
-
         static string getQuant()
         {
             Console.WriteLine("Please Input the Quantity of the task");
@@ -147,9 +137,17 @@ namespace Variables
             }
             Console.Clear();
             return quant;
-
         }
-
+        static void showAll()
+        {
+            var inputString = @"Select * FROM yourHabit";
+            var outputObject = executeSql(inputString, "r");
+            Console.WriteLine("ID       Date        Count");
+            for (int i = 0; i < outputObject.Count(); i += 3)
+            {
+                Console.WriteLine($"{outputObject[i]}       {outputObject[i + 1]}     {outputObject[i + 2]}");
+            }
+        }
         static void Main(string[] args)
         {
             var commandText = @"CREATE TABLE IF NOT EXISTS yourHabit (
@@ -172,8 +170,8 @@ namespace Variables
                         break;
                     case 1:
                         //View ALL
-                        Console.WriteLine("in 1");
-                        //var inputString = 
+                        Console.Clear();
+                        showAll();
                         break;
 
                     case 2:
@@ -182,61 +180,42 @@ namespace Variables
                         var date = getDate();
                         var quan = getQuant();
                         var index = Convert.ToString(maxId() + 1);
-                        inputString = @$"INSERT INTO yourHabit (ID, Date, Quantity)
-                                         VALUES ('{index}', '{date}', '{quan}')";
+                        inputString = @$"INSERT INTO yourHabit ( Date, Quantity)
+                                         VALUES ( '{date}', '{quan}')";
                         Console.WriteLine($"Inserting {quan} of habit on the {date} at index {index}");
                         outputObject = executeSql(inputString, "w");
                         break;
                     case 3:
                         //Delete Record
+                        Console.Clear();
+                        showAll();
+                        Console.WriteLine("Input ID to delete:");
+                        string delInput = Console.ReadLine();
+                        delInput = checkRegex(@"\d+", delInput);
+                        inputString = $"DELETE FROM yourHabit WHERE Id = {delInput}";
+                        executeSql(inputString, "w");
+                        showAll();
                         break;
                     case 4:
                         //Update Record
+                        Console.Clear();
+                        showAll();
+                        Console.WriteLine("Which Id would you like to update?");
+                        string upInput = Console.ReadLine();
+                        upInput = checkRegex(@"\d+", upInput);
+                        Console.WriteLine("Input the new amount");
+                        string quantInput = Console.ReadLine();
+                        quantInput = checkRegex(@"\d+", quantInput);
+                        inputString = $"UPDATE yourHabit SET Quantity = {quantInput} WHERE Id= {upInput}";
+                        executeSql("")
                         break;
                     default:
                         //Loop
+                        Console.Clear();
                         userInputGenerator(userInput);
                         break;
                 }
             }
-            
-
-
-            //Console.WriteLine(userInput);
-            
-
-            ///*Creating a connection passing the connection string as an argument
-            //This will create the database for you, there's no need to manually create it.
-            //And no need to use File.Create().*/
-            //using (var connection = new SqliteConnection(connectionString))
-            //{
-            //    var tableCmd = connection.CreateCommand();
-            //    //Creating the command that will be sent to the database
-            //    using (tableCmd);
-            //    {
-            //        //Declaring what is that command (in SQL syntax)
-            //        tableCmd.CommandText =
-            //            @"CREATE TABLE IF NOT EXISTS yourHabit (
-            //                Id INTEGER PRIMARY KEY AUTOINCREMENT,
-            //                Date TEXT,
-            //                Quantity INTEGER
-            //                )";
-            //        connection.Open();
-            //        // Executing the command, which isn't a query, it's not asking to return data from the database.
-            //        tableCmd.ExecuteNonQuery();
-            //        connection.Close();
-
-            //    }
-            //    // We don't need to close the connection or the command. The 'using statement' does that for us.
-            //}
-
-            ///* Once we check if the database exists and create it (or not),
-            //we will call the next method, which will handle the user's input.*/
-            ////GetUserInput();
-
         }
     }
-
 }
-
-
