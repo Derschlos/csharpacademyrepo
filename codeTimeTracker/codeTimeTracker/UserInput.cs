@@ -8,5 +8,12 @@ namespace codeTimeTracker
 {
     internal class UserInput
     {
+        public string dateInput()
+        {
+            Console.WriteLine("Please Input a time in ");
+
+            return date
+        }
+
     }
 }
