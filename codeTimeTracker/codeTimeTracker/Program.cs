@@ -10,3 +10,4 @@ string sAtt = ConfigurationManager.AppSettings.Get("databasePath");
 Console.WriteLine("between");
 Console.WriteLine(sAtt);
 Console.WriteLine("these");
+codeTimeTracker.CodingSession.start();

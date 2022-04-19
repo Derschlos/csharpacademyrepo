@@ -8,6 +8,10 @@ namespace codeTimeTracker
 {
     internal class CodingSession
     {
-
+        public static void start()
+        {
+            Console.WriteLine("CodingSession");
+        }
     }
+
 }
