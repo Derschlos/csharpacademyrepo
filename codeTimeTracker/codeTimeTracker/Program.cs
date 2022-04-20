@@ -15,3 +15,8 @@ Console.WriteLine("these");
 CodingSession session = new CodingSession();
 //session.id = 1;
 //session.first.set() = "a"
+session.End = "19.04.2022 15:30";
+Console.WriteLine(session.Start);
+session.Start = "17:00";
+session.durationEval();
+Console.WriteLine(session.Duration);

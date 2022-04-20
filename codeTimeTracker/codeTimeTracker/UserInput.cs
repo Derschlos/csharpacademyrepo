@@ -10,9 +10,9 @@ namespace codeTimeTracker
     {
         public string dateInput()
         {
-            Console.WriteLine("Please Input a time in ");
+            Console.WriteLine("Please Input a time");
 
-            return date
+            return "a";
         }
 
     }

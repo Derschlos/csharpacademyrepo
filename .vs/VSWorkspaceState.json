@@ -1,9 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\habit tracker",
+    "\\codeTimeTracker",
+    "\\codeTimeTracker\\codeTimeTracker",
     "\\habit tracker\\habit tracker"
   ],
-  "SelectedNode": "\\habit tracker\\habit tracker\\Program.cs",
+  "SelectedNode": "\\codeTimeTracker\\codeTimeTracker\\Program.cs",
   "PreviewInSolutionExplorer": false
 }
