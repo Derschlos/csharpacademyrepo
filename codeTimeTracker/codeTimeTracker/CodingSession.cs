@@ -32,7 +32,7 @@ namespace codeTimeTracker
             set { _end = parseDate(value); }
         }
         
-        private TimeSpan _duration;
+        private double _duration;
         public string Duration 
         { 
             get { return _duration.ToString(); } 
@@ -57,17 +57,18 @@ namespace codeTimeTracker
 
         public void durationEval()
         {
-            _duration = _end - _start;
-            var u = _duration.TotalHours;
-            Console.WriteLine(u);
-            _duration = _duration.Duration();
-            //return DateTime.Now;
+            _duration = Math.Abs((_end - _start).TotalHours);
         }
+        public void startCounter()
+        {
+            _start = DateTime.Now;
+        }
+        public void endCounter()
+        {
+            _end = DateTime.Now;
 
-        //public static void start()
-        //{
-        //    Console.WriteLine("CodingSession");
-        //}
+        }
+        
         
     }   
 
