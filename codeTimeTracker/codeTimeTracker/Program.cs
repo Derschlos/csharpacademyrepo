@@ -20,4 +20,7 @@ Console.WriteLine(session.Start);
 session.End = "20.04.2022 19:00";
 Console.WriteLine(session.End);
 session.durationEval();
-Console.WriteLine(session.Duration);
+//Console.WriteLine(session.Duration);
+UserInput a = new UserInput();
+string b = a.timeInput();
+Console.WriteLine(b);

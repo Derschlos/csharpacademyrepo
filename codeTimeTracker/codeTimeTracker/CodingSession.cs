@@ -66,7 +66,10 @@ namespace codeTimeTracker
         public void endCounter()
         {
             _end = DateTime.Now;
-
+            if (_start.Year > 1900)
+            {
+                durationEval();
+            }
         }
         
         
