@@ -9,34 +9,26 @@ namespace codeTimeTracker
     internal class CodingSession
     {
         private int _id;
-        public int Id { get { return _id; } set { _id = value;} }
-
-        //private DateTime _date;
-        //public string Date
-        //{
-        //    get { return _date.ToString(); }
-        //    set {_date = parseDate(value);}
-        //}
-        
+        public int Id { get { return _id; } set { _id = value;} }        
         private DateTime _start;
         public string Start 
         { 
             get { return _start.ToString(); } 
             set { _start = parseDate(value); }
         }
-        
         private DateTime _end;
         public string End 
         { 
             get { return _end.ToString(); } 
             set { _end = parseDate(value); }
-        }
-        
+        }       
         private double _duration;
         public string Duration 
         { 
             get { return _duration.ToString(); } 
         }
+
+
 
         private static DateTime parseDate(string inVal)
         {
@@ -57,6 +49,11 @@ namespace codeTimeTracker
 
         public void durationEval()
         {
+            if(_end.Year<1950 || _start.Year <1950)
+            {
+                Console.WriteLine("Start or Enddate is faulty. Duration will not be considered");
+                return;
+            }
             _duration = Math.Abs((_end - _start).TotalHours);
         }
         public void startCounter()

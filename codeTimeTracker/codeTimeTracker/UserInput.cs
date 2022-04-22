@@ -11,14 +11,13 @@ namespace codeTimeTracker
     {
         public string timeInput()
         {   
-            string uOut = string.Empty;
+            string uOut = null;
             Console.WriteLine("Would you like to use today as Date?(y/n)");
-            while (uOut == string.Empty)
+            string uInp = Console.ReadLine();
+            while (uOut == null)
             {
-                string uInp = Console.ReadLine();
                 if (uInp == "y")
                 {
-                    
                     uOut = DateTime.Today.ToString("d");
                     Console.WriteLine(uOut);
                 }
@@ -26,7 +25,11 @@ namespace codeTimeTracker
                 {
                     Console.WriteLine("Input your date with the following format: DD.MM.YYYY");
                     uOut = Console.ReadLine();
-
+                    uOut = rgxCheck(@"\d\d.\d\d.\d\d\d\d", uOut);
+                    if (uOut == null)
+                    {
+                        Console.WriteLine("Wrong format. Did you make a typo?");
+                    }
                 }
                 else
                 {
@@ -34,12 +37,44 @@ namespace codeTimeTracker
                 }
 
             }
-            Console.WriteLine("Please Input a time in 24h format (eg 16:30):");
-            string timeInp = Console.ReadLine();
-            timeInp = rgxCheck(@"\d\d:\d\d", timeInp);
-
-            uOut = uOut + " " + Console.ReadLine();
+            string timeInp = null;
+            while (timeInp == null)
+            {
+                Console.WriteLine("Please Input a time in 24h format (eg 16:30):");
+                timeInp = Console.ReadLine();
+                timeInp = rgxCheck(@"\d\d:\d\d", timeInp);
+            }
+            uOut = uOut + " " + timeInp;
             return uOut;
+        }
+        
+        public static int menu( List<string> menue)
+        //never initalize to negative numbers
+        {
+            int userInput = 900;
+            Console.WriteLine("What would you like to do?\n\n");
+            foreach (string opt in menue)
+            {
+                Console.WriteLine(opt);
+            }
+            while (userInput >= 0 & userInput >= menue.Count)
+            {
+                try
+                {
+
+                    userInput = Math.Abs(Convert.ToInt32(Console.ReadLine()));
+
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Bitte eine Zahl eingeben");
+                }
+                if (userInput > menue.Count - 1)
+                {
+                    Console.WriteLine("Invalid number. Try again:");
+                }
+            }
+            return userInput;
         }
 
         public string rgxCheck(string pattern, string text)
