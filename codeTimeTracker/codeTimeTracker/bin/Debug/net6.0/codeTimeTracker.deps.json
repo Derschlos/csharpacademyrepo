@@ -8,12 +8,21 @@
     ".NETCoreApp,Version=v6.0": {
       "codeTimeTracker/1.0.0": {
         "dependencies": {
+          "ConsoleTableExt": "3.1.9",
           "Microsoft.Data.Sqlite": "6.0.4",
           "Microsoft.Data.Sqlite.Core": "6.0.4",
           "System.Configuration.ConfigurationManager": "6.0.0"
         },
         "runtime": {
           "codeTimeTracker.dll": {}
+        }
+      },
+      "ConsoleTableExt/3.1.9": {
+        "runtime": {
+          "lib/netstandard2.0/ConsoleTableExt.dll": {
+            "assemblyVersion": "3.1.9.0",
+            "fileVersion": "3.1.9.0"
+          }
         }
       },
       "Microsoft.Data.Sqlite/6.0.4": {
@@ -256,6 +265,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "ConsoleTableExt/3.1.9": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-DbzU4aB2V9vdfoVBaKGkGwghIRhW8ZGOYN8rSYMthk3U7gAkmuQRc9vqLjS91olHePKwbyUPNxtqy6uALkYmng==",
+      "path": "consoletableext/3.1.9",
+      "hashPath": "consoletableext.3.1.9.nupkg.sha512"
     },
     "Microsoft.Data.Sqlite/6.0.4": {
       "type": "package",

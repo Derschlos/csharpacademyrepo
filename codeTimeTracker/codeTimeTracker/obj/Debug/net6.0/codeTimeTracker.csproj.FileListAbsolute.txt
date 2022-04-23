@@ -92,3 +92,4 @@ C:\Users\David\Desktop\Programieren\cSharpAcademy\codeTimeTracker\codeTimeTracke
 C:\Users\David\Desktop\Programieren\cSharpAcademy\codeTimeTracker\codeTimeTracker\obj\Debug\net6.0\codeTimeTracker.pdb
 C:\Users\David\Desktop\Programieren\cSharpAcademy\codeTimeTracker\codeTimeTracker\obj\Debug\net6.0\codeTimeTracker.genruntimeconfig.cache
 C:\Users\David\Desktop\Programieren\cSharpAcademy\codeTimeTracker\codeTimeTracker\obj\Debug\net6.0\ref\codeTimeTracker.dll
+C:\Users\David\Desktop\Programieren\cSharpAcademy\codeTimeTracker\codeTimeTracker\bin\Debug\net6.0\ConsoleTableExt.dll
