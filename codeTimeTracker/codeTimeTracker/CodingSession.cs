@@ -68,8 +68,11 @@ namespace codeTimeTracker
                 durationEval();
             }
         }
-        
-        
+        public List<object> expData()
+        {
+            return new List<object> { Convert.ToString(Id), Start, End, Duration };
+        }
+
     }   
 
 }

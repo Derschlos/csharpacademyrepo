@@ -20,7 +20,7 @@ namespace codeTimeTracker
                                                 )", 
                                                 "w");
 
-        private static List<String> executeSql(string inputString, string readWrite)
+        public static List<String> executeSql(string inputString, string readWrite)
         {
             using (con)
             {
