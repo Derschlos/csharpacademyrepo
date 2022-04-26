@@ -42,7 +42,7 @@ namespace codeTimeTracker
                                 var reader = tableCmd.ExecuteReader();
                                 while (reader.Read())
                                 {
-                                    object[] row = new object[3];
+                                    object[] row = new object[4];
                                     reader.GetValues(row);
                                     foreach (var val in row)
                                         rowData.Add(Convert.ToString(val));
@@ -56,5 +56,16 @@ namespace codeTimeTracker
             }
         }
         
+        public static Dictionary<int, CodingSession> getSessions(string sqlIn)
+        {
+            Dictionary<int, CodingSession> sessionList = new Dictionary<int, CodingSession>();
+            List<string> sqlOut = SqlDriver.executeSql(sqlIn, "r");
+            for (int i = 0; i < sqlOut.Count; i += 4)
+            {
+                //Console.WriteLine($"{sqlOut[i + 1]} {sqlOut[i + 2]}  {sqlOut[i + 3]} ");
+                sessionList.Add(Convert.ToInt32(sqlOut[i]), new CodingSession(Convert.ToInt32(sqlOut[i]), sqlOut[i + 1], sqlOut[i + 2], sqlOut[i + 3]));
+            }
+            return sessionList;
+        }
     }
 }

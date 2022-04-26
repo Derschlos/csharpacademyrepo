@@ -8,24 +8,17 @@ using ConsoleTableExt;
 
 //UserInput uIn = new UserInput();
 SqlDriver sql = new SqlDriver();
-
-
-
-List<string> mainMenu = new List<string>()
-{
-    "Type 0 to close the application",
-    "Type 1 to view all records",
-    "Type 2 to start the counter",
-    "Type 3 to end the counter",
-    "Type 4 to manually change dates"
-};
-
 int userInput = 800;
 
 
-static void createTable(List<List<object>> data, string title)
+static void createTable(Dictionary<int, CodingSession> data, string title)
 {
-    ConsoleTableBuilder.From(data)
+    var tableData = new List<List<object>> { };
+    foreach (var ses in data)
+    {
+        tableData.Add(ses.Value.expData());
+    }
+    ConsoleTableBuilder.From(tableData)
                     .WithTextAlignment(new Dictionary<int, TextAligntment> {
                     { 0, TextAligntment.Center },
                     { 1, TextAligntment.Center },
@@ -71,7 +64,7 @@ static void createTable(List<List<object>> data, string title)
 
 
 
-List<CodingSession> sessionList = new List<CodingSession>();
+//Dictionary<int, CodingSession> sessionList = new Dictionary<int, CodingSession>();
 //{
 //    session,
 //    currentSession
@@ -84,15 +77,25 @@ List<CodingSession> sessionList = new List<CodingSession>();
 //                                         VALUES ( '{s.Start}', '{s.End}', '{s.Duration}' )";
 //    SqlDriver.executeSql(a,"w");
 //}
-List<object> se = new List<object>();
-string a = @$"SELECT * FROM codeTrack";
-se.Add(SqlDriver.executeSql(a,"r"));
+
+List<string> mainMenu = new List<string>()
+{
+    "Type 0 to close the application",
+    "Type 1 to view all records",
+    "Type 2 to start the counter",
+    "Type 3 to end the counter",
+    "Type 4 to manually change dates"
+};
+
+string sqlIn = @"SELECT MAX(id) FROM codeTrack";
+var maxId = SqlDriver.executeSql(sqlIn, "r");
+CodingSession currSession = new CodingSession(Convert.ToInt32(maxId[0]), "", "", "0:00");
 
 while (userInput != 0)
 {
     userInput = UserInput.menu(mainMenu);
     Console.Clear();
-    var tableData = new List<List<object>>{};
+    //var tableData = new List<List<object>>{};
 
     //foreach (var ses in sessionList)
     //    tableData.Add(ses.expData());
@@ -100,7 +103,9 @@ while (userInput != 0)
     switch (userInput)
     {
         case 1:
-            createTable(tableData, "all dates");
+            sqlIn = @$"SELECT * FROM codeTrack";
+            var sqlOut = SqlDriver.getSessions(sqlIn);
+            createTable(sqlOut, "all dates");
             break;
         case 2:
 

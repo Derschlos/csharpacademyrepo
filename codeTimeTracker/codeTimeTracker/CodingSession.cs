@@ -8,6 +8,7 @@ namespace codeTimeTracker
 {
     internal class CodingSession
     {
+   
         private int _id;
         public int Id { get { return _id; } set { _id = value;} }        
         private DateTime _start;
@@ -28,6 +29,13 @@ namespace codeTimeTracker
             get { return _duration.ToString(); } 
         }
 
+        public CodingSession(int Id, string Start, string End, string Duration)
+        {
+            this.Id = Id;
+            this.Start = Start;
+            this.End = End;
+            _duration = Convert.ToDouble( Duration);
+        }
 
 
         private static DateTime parseDate(string inVal)
