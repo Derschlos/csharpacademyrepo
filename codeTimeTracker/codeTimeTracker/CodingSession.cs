@@ -15,13 +15,13 @@ namespace codeTimeTracker
         public string Start 
         { 
             get { return _start.ToString(); } 
-            set { _start = parseDate(value); }
+            set { if (value != null) { _start = parseDate(value); } }
         }
         private DateTime _end;
         public string End 
         { 
             get { return _end.ToString(); } 
-            set { _end = parseDate(value); }
+            set {if (value != null) { _end = parseDate(value); }}
         }       
         private double _duration;
         public string Duration 
@@ -81,6 +81,26 @@ namespace codeTimeTracker
             return new List<object> { Convert.ToString(Id), Start, End, Duration };
         }
 
+        public string insRowSql(bool edit) 
+        {
+            string sqlIn;
+            if (_start.Year > 1900 && _end.Year > 1900)
+            {
+                if(edit)
+                {
+                     sqlIn = $@"INSERT INTO codeTrack (id, startDate ,endDate , duration)
+                VALUES ({Id}'{Start}','{End}','{Duration}')";
+                }
+                else
+                {
+                    sqlIn = $@"INSERT INTO codeTrack (startDate ,endDate , duration)
+                VALUES ('{Start}','{End}','{Duration}')";
+                }    
+                var sqlOut = SqlDriver.executeSql(sqlIn, "w");
+                return "Row inserted succesfully";
+            }
+            return "Could not insert row because either the start or end were not set";
+        }
     }   
 
 }

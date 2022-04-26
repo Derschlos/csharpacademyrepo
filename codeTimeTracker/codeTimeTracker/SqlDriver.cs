@@ -12,7 +12,7 @@ namespace codeTimeTracker
     {
         private static SqliteConnection con = new SqliteConnection(@"Data Source="+ConfigurationManager.AppSettings.Get("databasePath"));
 
-        List<string> outputObject = executeSql(@"CREATE TABLE IF NOT EXISTS codeTrack (
+        static List<string> outputObject = executeSql(@"CREATE TABLE IF NOT EXISTS codeTrack (
                                                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                                                 startDate TEXT,
                                                 endDate TEXT,
@@ -67,5 +67,6 @@ namespace codeTimeTracker
             }
             return sessionList;
         }
+
     }
 }

@@ -7,8 +7,8 @@ using codeTimeTracker;
 using ConsoleTableExt;
 
 //UserInput uIn = new UserInput();
-SqlDriver sql = new SqlDriver();
-int userInput = 800;
+//SqlDriver sql = new SqlDriver();
+
 
 
 static void createTable(Dictionary<int, CodingSession> data, string title)
@@ -52,53 +52,27 @@ static void createTable(Dictionary<int, CodingSession> data, string title)
                     .ExportAndWriteLine();
 }
 
-//CodingSession session = new CodingSession();
-//session.Id = 80;
-//session.Start = "19.04.2022 15:30";
-//session.End = "19.04.2022 19:00";
 
-//CodingSession currentSession = new CodingSession();
-//currentSession.Id = 5;
-//currentSession.Start = "20.04.2022 11:00";
-//currentSession.End = "20.04.2022 18:00";
-
-
-
-//Dictionary<int, CodingSession> sessionList = new Dictionary<int, CodingSession>();
-//{
-//    session,
-//    currentSession
-//};
-
-//foreach(CodingSession s in sessionList)
-//{
-//    s.durationEval();
-//    string a = @$"INSERT INTO codeTrack ( startDate, endDate , duration)
-//                                         VALUES ( '{s.Start}', '{s.End}', '{s.Duration}' )";
-//    SqlDriver.executeSql(a,"w");
-//}
-
-List<string> mainMenu = new List<string>()
-{
-    "Type 0 to close the application",
-    "Type 1 to view all records",
-    "Type 2 to start the counter",
-    "Type 3 to end the counter",
-    "Type 4 to manually change dates"
-};
 
 string sqlIn = @"SELECT MAX(id) FROM codeTrack";
 var maxId = SqlDriver.executeSql(sqlIn, "r");
-CodingSession currSession = new CodingSession(Convert.ToInt32(maxId[0]), "", "", "0:00");
+CodingSession currSession = new CodingSession(Convert.ToInt32(maxId[0]), null, null, null);
 
+List<string> mainMenu = new List<string>()
+    {
+        "Type 0 to close the application",
+        "\nType 1 to view all records",
+        "Type 2 to start the counter",
+        "Type 3 to end the counter",
+        "Type 4 to save the current session",
+        "\nType 5 to manually change dates"
+    };
+
+int userInput = 800;
 while (userInput != 0)
 {
     userInput = UserInput.menu(mainMenu);
     Console.Clear();
-    //var tableData = new List<List<object>>{};
-
-    //foreach (var ses in sessionList)
-    //    tableData.Add(ses.expData());
 
     switch (userInput)
     {
@@ -108,19 +82,40 @@ while (userInput != 0)
             createTable(sqlOut, "all dates");
             break;
         case 2:
-
+            UserInput.cwWrap("Starting the counter");
+            currSession.startCounter();
             break;
         case 3:
+            UserInput.cwWrap("Stoping the counter and evaluating data");
+            currSession.endCounter();
             break;
         case 4:
+            UserInput.cwWrap(currSession.insRowSql(false));
+            break;
+        case 5:
+            Console.Clear();
             List<string> manualMenu = new List<string>()
             {
-                "Type 0 to return to main menu",
-                "Type 1 to edit a ",
-                "Type 2 to end the counter",
-                "Type 3 to manually change dates"
+                "Type 0 to return to main menu\n",
+                "Type 1 to insert a session",
+                "Type 2 to edit a session",
+                "Type 3 to delete a session"    
             };
+            userInput = UserInput.menu(manualMenu);
+            while (userInput != 0)
+            {
+                switch(userInput)
+                {
+                    case 1:
+                        sqlIn = @$"SELECT * FROM codeTrack";
+                        sqlOut = SqlDriver.getSessions(sqlIn);
+                        createTable(sqlOut, "all dates");
+                        var manualSess = UserInput.createCustomSession("insert");
 
+                        break;
+                }
+            }
+            userInput = 900;
             break;
     }
 }
