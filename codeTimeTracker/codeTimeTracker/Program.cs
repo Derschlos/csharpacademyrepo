@@ -110,7 +110,19 @@ while (userInput != 0)
                         sqlIn = @$"SELECT * FROM codeTrack";
                         sqlOut = SqlDriver.getSessions(sqlIn);
                         createTable(sqlOut, "all dates");
-                        var manualSess = UserInput.createCustomSession("insert");
+                        var manualSess = new CodingSession(4, null, null, null);
+                        //var manualSess = UserInput.createCustomSession("insert");
+                        sqlIn = @"SELECT MAX(id) FROM codeTrack";
+                        maxId = SqlDriver.executeSql(sqlIn, "r");
+                        List<String> loopSql;
+                        //for (int i = Convert.ToInt32(maxId[0]); i < manualSess.Id; i--)
+                        //{
+                        //    sqlIn = @$"SELECT * FROM codeTrack WHERE id = {i}";
+                        //    loopSql = SqlDriver.executeSql(sqlIn, "r");
+                        //    sqlIn = $@"INSERT INTO codeTrack (ROWID, startDate ,endDate , duration)
+                        //                    VALUES ({i + 1}'{loopSql[1]}','{loopSql[2]}','{loopSql[3]}')";
+                        //    SqlDriver.executeSql(sqlIn, "w");
+                        //}
 
                         break;
                 }
