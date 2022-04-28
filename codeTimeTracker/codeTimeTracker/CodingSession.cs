@@ -80,27 +80,13 @@ namespace codeTimeTracker
         {
             return new List<object> { Convert.ToString(Id), Start, End, Duration };
         }
-
-        public string insRowSql(bool edit) 
+        public bool checkForTimeInputs()
         {
-            string sqlIn;
             if (_start.Year > 1900 && _end.Year > 1900)
-            {
-                if(edit)
-                {
-                     sqlIn = $@"INSERT INTO codeTrack (id, startDate ,endDate , duration)
-                VALUES ({Id}'{Start}','{End}','{Duration}')";
-                }
-                else
-                {
-                    sqlIn = $@"INSERT INTO codeTrack (startDate ,endDate , duration)
-                VALUES ('{Start}','{End}','{Duration}')";
-                }    
-                var sqlOut = SqlDriver.executeSql(sqlIn, "w");
-                return "Row inserted succesfully";
-            }
-            return "Could not insert row because either the start or end were not set";
+                return true;
+            return false;
         }
+    
     }   
 
 }

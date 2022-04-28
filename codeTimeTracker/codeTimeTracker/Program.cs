@@ -68,18 +68,24 @@ List<string> mainMenu = new List<string>()
         "\nType 5 to manually change dates"
     };
 
-int userInput = 800;
-while (userInput != 0)
+static void showAllDates()
 {
-    userInput = UserInput.menu(mainMenu);
+    var sqlIn = @$"SELECT * FROM codeTrack";
+    var sqlOut = SqlDriver.getSessions(sqlIn);
+    createTable(sqlOut, "all dates");
+}
+
+int consoleInput = 800;
+while (consoleInput != 0)
+{
+    
+    consoleInput = UserInput.menu(mainMenu);
     Console.Clear();
 
-    switch (userInput)
+    switch (consoleInput)
     {
         case 1:
-            sqlIn = @$"SELECT * FROM codeTrack";
-            var sqlOut = SqlDriver.getSessions(sqlIn);
-            createTable(sqlOut, "all dates");
+            showAllDates();
             break;
         case 2:
             UserInput.cwWrap("Starting the counter");
@@ -90,7 +96,7 @@ while (userInput != 0)
             currSession.endCounter();
             break;
         case 4:
-            UserInput.cwWrap(currSession.insRowSql(false));
+            UserInput.cwWrap(SqlDriver.insRowSql(currSession,false));
             break;
         case 5:
             Console.Clear();
@@ -101,33 +107,27 @@ while (userInput != 0)
                 "Type 2 to edit a session",
                 "Type 3 to delete a session"    
             };
-            userInput = UserInput.menu(manualMenu);
-            while (userInput != 0)
+            CodingSession manualSess;
+            while (consoleInput != 0)
             {
-                switch(userInput)
+                consoleInput = UserInput.menu(manualMenu);
+
+                switch (consoleInput)
                 {
                     case 1:
-                        sqlIn = @$"SELECT * FROM codeTrack";
-                        sqlOut = SqlDriver.getSessions(sqlIn);
-                        createTable(sqlOut, "all dates");
-                        var manualSess = new CodingSession(4, null, null, null);
-                        //var manualSess = UserInput.createCustomSession("insert");
-                        sqlIn = @"SELECT MAX(id) FROM codeTrack";
-                        maxId = SqlDriver.executeSql(sqlIn, "r");
-                        List<String> loopSql;
-                        //for (int i = Convert.ToInt32(maxId[0]); i < manualSess.Id; i--)
-                        //{
-                        //    sqlIn = @$"SELECT * FROM codeTrack WHERE id = {i}";
-                        //    loopSql = SqlDriver.executeSql(sqlIn, "r");
-                        //    sqlIn = $@"INSERT INTO codeTrack (ROWID, startDate ,endDate , duration)
-                        //                    VALUES ({i + 1}'{loopSql[1]}','{loopSql[2]}','{loopSql[3]}')";
-                        //    SqlDriver.executeSql(sqlIn, "w");
-                        //}
-
+                        showAllDates();
+                        manualSess = UserInput.createCustomSession("insert");
+                        SqlDriver.insertBetweenRows(manualSess);
+                        break;
+                    case 2:
+                        showAllDates();
+                        manualSess = UserInput.createCustomSession("edit");
+                        UserInput.cwWrap(SqlDriver.editRows(manualSess));
                         break;
                 }
+
             }
-            userInput = 900;
+            consoleInput = 900;
             break;
     }
 }

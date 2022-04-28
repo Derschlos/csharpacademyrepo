@@ -29,9 +29,10 @@ namespace codeTimeTracker
             return insSession;
         }
 
-        public static string timeInp()
+        public static string timeInp(bool )
         {   
             string uOut = null;
+
             Console.WriteLine("Would you like to use today as Date?(y/n)");
             string uInp = Console.ReadLine();
             while (uOut == null)
