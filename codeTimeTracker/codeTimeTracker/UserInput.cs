@@ -20,57 +20,88 @@ namespace codeTimeTracker
         {
             UserInput.cwWrap($"Where would you like to {editInsert}?");
             int newId = UserInput.idInp();
+            if (editInsert == "edit")
+            {
+                SqlDriver.GetSessionById(newId, newId);
+            }
+            
             CodingSession insSession = new CodingSession(newId, null, null, null);
             UserInput.cwWrap("Please Input the start dates");
-            insSession.Start = UserInput.timeInp();
+            insSession.Start = timeInp(null);
+
             UserInput.cwWrap("Now please Input the end dates");
-            insSession.End = UserInput.timeInp();
+            insSession.End = secondDayInput(insSession.startYear());
             insSession.durationEval();
             return insSession;
         }
-
-        public static string timeInp(bool )
-        {   
+        public static string secondDayInput(string startYear)
+        {
             string uOut = null;
-
-            Console.WriteLine("Would you like to use today as Date?(y/n)");
+            Console.WriteLine("Would you like to use the same day as for the Start Date?(y/n)");
             string uInp = Console.ReadLine();
             while (uOut == null)
             {
                 if (uInp == "y")
                 {
-                    uOut = DateTime.Today.ToString("d");
-                    Console.WriteLine(uOut);
+                    return timeInp(startYear);
                 }
-                else if (uInp == "n")
+                uOut = timeInp(null);
+            }
+            return uOut;
+        }
+        public static string timeInp(string dateSelected)
+        {   
+            string uOut = null;
+            string uInp;
+            if (dateSelected == null)
+            {
+                Console.WriteLine("Would you like to use today as Date?(y/n)");
+                uInp = Console.ReadLine();
+                while (uOut == null)
                 {
-                    Console.WriteLine("Input your date with the following format: DD.MM.YYYY");
-                    uOut = Console.ReadLine();
-                    uOut = rgxCheck(@"\d\d.\d\d.\d\d\d\d", uOut);
-                    if (uOut == null)
+                    if (uInp == "y")
                     {
-                        Console.WriteLine("Wrong format. Did you make a typo?");
+                        uOut = DateTime.Today.ToString("d");
+                        Console.WriteLine(uOut);
                     }
-                }
-                else
-                {
-                    Console.WriteLine("could not read your Respose");
-                }
+                    else if (uInp == "n")
+                    {
+                        Console.WriteLine("Input your date with the following format: DD.MM.YYYY");
+                        uOut = Console.ReadLine();
+                        uOut = rgxCheck(@"\d\d.\d\d.\d\d\d\d", uOut);
+                        if (uOut == null)
+                        {
+                            Console.WriteLine("Wrong format. Did you make a typo?");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("could not read your Respose");
+                    }
 
+                }
             }
             string timeInp = null;
+            
             while (timeInp == null)
             {
                 Console.WriteLine("Please Input a time in 24h format (eg 16:30):");
                 timeInp = Console.ReadLine();
-                timeInp = rgxCheck(@"\d\d:\d\d", timeInp);
+                timeInp = rgxCheck(@"\d?\d:\d\d", timeInp);
             }
-            uOut = uOut + " " + timeInp;
+            if (uOut != null)
+            {
+                uOut = uOut + " " + timeInp;
+            }
+            else
+            {
+                uOut = dateSelected + " " + timeInp;
+            }
             return uOut;
         }
         public static int idInp()
         {
-            Console.WriteLine("At which Id would you like to edit/insert?");
+            Console.WriteLine("Which Id would you like to select?");
             
             string uOut = null;
             while(uOut == null)
@@ -82,6 +113,7 @@ namespace codeTimeTracker
                     Console.WriteLine("Invalid input. Please input a number");
                 }
             }
+
             return Convert.ToInt32(uOut);
         }
         public static int menu( List<string> menue)
@@ -113,7 +145,7 @@ namespace codeTimeTracker
             return userInput;
         }
 
-        //public static 
+
         public static string rgxCheck(string pattern, string text)
         {
             Regex rgx = new Regex(pattern);

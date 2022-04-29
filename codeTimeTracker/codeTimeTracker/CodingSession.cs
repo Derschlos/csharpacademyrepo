@@ -54,7 +54,7 @@ namespace codeTimeTracker
             }
 
         }
-
+       
         public void durationEval()
         {
             if(_end.Year<1950 || _start.Year <1950)
@@ -85,6 +85,10 @@ namespace codeTimeTracker
             if (_start.Year > 1900 && _end.Year > 1900)
                 return true;
             return false;
+        }
+        public string startYear()
+        {
+            return _start.Date.ToString("d");
         }
     
     }   

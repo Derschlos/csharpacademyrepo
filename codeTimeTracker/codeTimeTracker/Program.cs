@@ -4,54 +4,6 @@ using Microsoft.Data.Sqlite;
 using System.Globalization;
 using System.Text.RegularExpressions;
 using codeTimeTracker;
-using ConsoleTableExt;
-
-//UserInput uIn = new UserInput();
-//SqlDriver sql = new SqlDriver();
-
-
-
-static void createTable(Dictionary<int, CodingSession> data, string title)
-{
-    var tableData = new List<List<object>> { };
-    foreach (var ses in data)
-    {
-        tableData.Add(ses.Value.expData());
-    }
-    ConsoleTableBuilder.From(tableData)
-                    .WithTextAlignment(new Dictionary<int, TextAligntment> {
-                    { 0, TextAligntment.Center },
-                    { 1, TextAligntment.Center },
-                    { 2, TextAligntment.Center },
-                    { 3, TextAligntment.Center }
-                    })
-                    .WithMinLength(new Dictionary<int, int> {
-                    { 0, 5 },
-                    { 1, 25 },
-                    { 2, 25 },
-                    { 3, 10 },
-                    })
-
-                    .WithTitle(title.ToUpper(), ConsoleColor.DarkYellow, ConsoleColor.DarkRed)
-                    .WithCharMapDefinition(CharMapDefinition.FrameDoublePipDefinition)
-                    .WithFormatter(3, (text) =>
-                    {
-                        if (string.IsNullOrEmpty(text) || text.Trim().Length == 0)
-                        {
-                            return "0 h";
-                        }
-                        else
-                        {
-                            return text + " h";
-                        }
-                    })
-                    .WithColumnFormatter(0, (text) => "ID")
-                    .WithColumnFormatter(1, (text) => "Start Date")
-                    .WithColumnFormatter(2, (text) => "End Date")
-                    .WithColumnFormatter(3, (text) => "Duration")
-                    .ExportAndWriteLine();
-}
-
 
 
 string sqlIn = @"SELECT MAX(id) FROM codeTrack";
@@ -65,15 +17,15 @@ List<string> mainMenu = new List<string>()
         "Type 2 to start the counter",
         "Type 3 to end the counter",
         "Type 4 to save the current session",
-        "\nType 5 to manually change dates"
+        "\nType 5 to manually change dates",
+        "Type 6 to view the current session"
     };
 
 static void showAllDates()
-{
-    var sqlIn = @$"SELECT * FROM codeTrack";
-    var sqlOut = SqlDriver.getSessions(sqlIn);
-    createTable(sqlOut, "all dates");
+{   
+    var sqlOut = SqlDriver.getAllSessions();
 }
+
 
 int consoleInput = 800;
 while (consoleInput != 0)
@@ -99,7 +51,7 @@ while (consoleInput != 0)
             UserInput.cwWrap(SqlDriver.insRowSql(currSession,false));
             break;
         case 5:
-            Console.Clear();
+            //Console.Clear();
             List<string> manualMenu = new List<string>()
             {
                 "Type 0 to return to main menu\n",
@@ -110,6 +62,7 @@ while (consoleInput != 0)
             CodingSession manualSess;
             while (consoleInput != 0)
             {
+                Console.Clear();
                 consoleInput = UserInput.menu(manualMenu);
 
                 switch (consoleInput)
@@ -124,11 +77,33 @@ while (consoleInput != 0)
                         manualSess = UserInput.createCustomSession("edit");
                         UserInput.cwWrap(SqlDriver.editRows(manualSess));
                         break;
+                    case 3:
+                        showAllDates();
+                        UserInput.cwWrap("Which Id do you want to delete?");
+                        var selectedId = UserInput.idInp();
+                        var selectedSession = SqlDriver.GetSessionById(selectedId, selectedId);
+                        UserInput.cwWrap("Are you sure you want to delete this Coding Session?(y/n)");
+                        var delete= Console.ReadLine();
+                        if (delete == "y")
+                        {
+                            UserInput.cwWrap(SqlDriver.deleteRow(selectedSession[selectedId]));
+                        }
+                        else if (delete == "n")
+                        {
+                            UserInput.cwWrap("Aborting. The Session will not be Deleted");
+                        }
+                        else
+                        {
+                            UserInput.cwWrap("Could not read your input. Delete will be aborted.");
+                        }
+                        break;
                 }
 
             }
             consoleInput = 900;
             break;
+        case 6:
+            SqlDriver.createTable({currSession,  maxId})
     }
 }
 

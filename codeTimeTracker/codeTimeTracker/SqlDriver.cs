@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Configuration;
 using Microsoft.Data.Sqlite;
+using ConsoleTableExt;
 
 namespace codeTimeTracker
 {
@@ -55,18 +56,79 @@ namespace codeTimeTracker
                 }
             }
         }
-        
-        public static Dictionary<int, CodingSession> getSessions(string sqlIn)
-        //gets a dict of all coding sessions from the db sorted by Id
+        public static void createTable(Dictionary<int, CodingSession> data, string title)
+        {
+            var tableData = new List<List<object>> { };
+            foreach (var ses in data)
+            {
+                tableData.Add(ses.Value.expData());
+            }
+            ConsoleTableBuilder.From(tableData)
+                            .WithTextAlignment(new Dictionary<int, TextAligntment> {
+                    { 0, TextAligntment.Center },
+                    { 1, TextAligntment.Center },
+                    { 2, TextAligntment.Center },
+                    { 3, TextAligntment.Center }
+                            })
+                            .WithMinLength(new Dictionary<int, int> {
+                    { 0, 5 },
+                    { 1, 25 },
+                    { 2, 25 },
+                    { 3, 10 },
+                            })
+
+                            .WithTitle(title.ToUpper(), ConsoleColor.DarkYellow, ConsoleColor.DarkRed)
+                            .WithCharMapDefinition(CharMapDefinition.FrameDoublePipDefinition)
+                            .WithFormatter(3, (text) =>
+                            {
+                                if (string.IsNullOrEmpty(text) || text.Trim().Length == 0)
+                                {
+                                    return "0 h";
+                                }
+                                else
+                                {
+                                    return text + " h";
+                                }
+                            })
+                            .WithColumnFormatter(0, (text) => "ID")
+                            .WithColumnFormatter(1, (text) => "Start Date")
+                            .WithColumnFormatter(2, (text) => "End Date")
+                            .WithColumnFormatter(3, (text) => "Duration")
+                            .ExportAndWriteLine();
+        }
+
+
+        private static Dictionary<int, CodingSession> transformToSessions(List<string> sqlOut)
         {
             Dictionary<int, CodingSession> sessionList = new Dictionary<int, CodingSession>();
-            List<string> sqlOut = SqlDriver.executeSql(sqlIn, "r");
             for (int i = 0; i < sqlOut.Count; i += 4)
             {
                 //Console.WriteLine($"{sqlOut[i + 1]} {sqlOut[i + 2]}  {sqlOut[i + 3]} ");
                 sessionList.Add(Convert.ToInt32(sqlOut[i]), new CodingSession(Convert.ToInt32(sqlOut[i]), sqlOut[i + 1], sqlOut[i + 2], sqlOut[i + 3]));
             }
             return sessionList;
+        }
+        public static Dictionary<int, CodingSession> getAllSessions()
+        //gets a dict of all coding sessions from the db sorted by Id
+        {
+            var sqlIn = @$"SELECT * FROM codeTrack";
+            
+            List<string> sqlOut = SqlDriver.executeSql(sqlIn, "r");
+            var sessionList = transformToSessions(sqlOut);
+            createTable(sessionList, "All Data");
+            return sessionList;
+        }
+        public static Dictionary<int, CodingSession> GetSessionById(int lowerId, int higherId)
+        {
+            var sqlIn = @$"SELECT * FROM codeTrack WHERE id BETWEEN {lowerId} AND {higherId} ";
+            List<string> sqlOut = SqlDriver.executeSql(sqlIn, "r");
+            var sessions = transformToSessions(sqlOut);
+            createTable(sessions, "Selected Rows");
+            if (sessions.Count == 0)
+            {
+                return null;
+            }
+            return sessions;
         }
         public static void insertBetweenRows(CodingSession manualSess)
             //creates a new sessionand checks if it fits into the db rows
@@ -120,9 +182,17 @@ namespace codeTimeTracker
             {
                 sqlIn = $@"UPDATE codeTrack SET startDate = '{session.Start}', 
                             endDate = '{session.End}', duration = '{session.Duration}' WHERE id = {session.Id}";
+                SqlDriver.executeSql(sqlIn, "w");
                 return "Row succesfully edited";
             }
             return "Could not edit Rows because either the start or end were not set correctly";
         }
+        public static string deleteRow(CodingSession session)
+        {
+            var sqlIn = $@"DELETE FROM codeTrack WHERE id = {session.Id}";
+            executeSql(sqlIn, "w");
+            return "Sessions successfully deleted";
+        }
+
     }
 }
