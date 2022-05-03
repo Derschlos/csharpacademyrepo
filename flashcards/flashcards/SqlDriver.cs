@@ -12,7 +12,17 @@ namespace flashcards
     internal class SqlDriver
     {
         //ConfigurationManager.AppSettings.Get("databasePath")
-        private static SqlConnection _connection = new SqlConnection();
+        private static SqlConnection _connection = new SqlConnection(@$"Data Source={ConfigurationManager.AppSettings.Get("dbLocation")}{ConfigurationManager.AppSettings.Get("dbName")};
+                                                                        Integrated Security={ConfigurationManager.AppSettings.Get("Integrated Security")}");
+        public static void initialize()
+        {
+           executeSql(@"if not exists (select * from sysobjects where name='languages' and xtype='U') 
+                            CREATE TABLE languages(
+                            id INTEGER PRIMARY KEY,
+                            name TEXT
+                            )", "w");
+        }
+
         public static List<String> executeSql(string inputString, string readWrite)
         {
             using (_connection)
@@ -48,5 +58,6 @@ namespace flashcards
                 }
             }
         }
+        List<String> a = executeSql("CREATE TABLE languages(id INTEGER PRIMARY KEY, name TEXT)", "w");
     }
 }

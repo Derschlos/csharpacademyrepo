@@ -20,3 +20,16 @@ C:\Users\davidleonschmidt\Desktop\Progs\thecsharpacad\flashcards\flashcards\obj\
 C:\Users\davidleonschmidt\Desktop\Progs\thecsharpacad\flashcards\flashcards\obj\Debug\net6.0\flashcards.pdb
 C:\Users\davidleonschmidt\Desktop\Progs\thecsharpacad\flashcards\flashcards\obj\Debug\net6.0\flashcards.genruntimeconfig.cache
 C:\Users\davidleonschmidt\Desktop\Progs\thecsharpacad\flashcards\flashcards\obj\Debug\net6.0\ref\flashcards.dll
+C:\Users\davidleonschmidt\Desktop\Progs\thecsharpacad\flashcards\flashcards\bin\Debug\net6.0\flashcards.dll.config
+C:\Users\davidleonschmidt\Desktop\Progs\thecsharpacad\flashcards\flashcards\bin\Debug\net6.0\ConsoleTableExt.dll
+C:\Users\davidleonschmidt\Desktop\Progs\thecsharpacad\flashcards\flashcards\bin\Debug\net6.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\davidleonschmidt\Desktop\Progs\thecsharpacad\flashcards\flashcards\bin\Debug\net6.0\System.Configuration.ConfigurationManager.dll
+C:\Users\davidleonschmidt\Desktop\Progs\thecsharpacad\flashcards\flashcards\bin\Debug\net6.0\System.Drawing.Common.dll
+C:\Users\davidleonschmidt\Desktop\Progs\thecsharpacad\flashcards\flashcards\bin\Debug\net6.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\davidleonschmidt\Desktop\Progs\thecsharpacad\flashcards\flashcards\bin\Debug\net6.0\System.Security.Permissions.dll
+C:\Users\davidleonschmidt\Desktop\Progs\thecsharpacad\flashcards\flashcards\bin\Debug\net6.0\System.Windows.Extensions.dll
+C:\Users\davidleonschmidt\Desktop\Progs\thecsharpacad\flashcards\flashcards\bin\Debug\net6.0\runtimes\win\lib\net6.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\davidleonschmidt\Desktop\Progs\thecsharpacad\flashcards\flashcards\bin\Debug\net6.0\runtimes\unix\lib\net6.0\System.Drawing.Common.dll
+C:\Users\davidleonschmidt\Desktop\Progs\thecsharpacad\flashcards\flashcards\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Drawing.Common.dll
+C:\Users\davidleonschmidt\Desktop\Progs\thecsharpacad\flashcards\flashcards\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\davidleonschmidt\Desktop\Progs\thecsharpacad\flashcards\flashcards\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll

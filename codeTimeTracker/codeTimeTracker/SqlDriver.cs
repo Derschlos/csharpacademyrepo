@@ -163,7 +163,7 @@ namespace codeTimeTracker
                 if (betweenRows)
                 {
                     sqlIn = $@"INSERT INTO codeTrack (id, startDate ,endDate , duration)
-                VALUES ({session.Id}'{session.Start}','{session.End}','{session.Duration}')";
+                VALUES ({session.Id},'{session.Start}','{session.End}','{session.Duration}')";
                 }
                 else
                 {

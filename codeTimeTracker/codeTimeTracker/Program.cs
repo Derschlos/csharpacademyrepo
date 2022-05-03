@@ -9,14 +9,12 @@ using codeTimeTracker;
 string sqlIn = @"SELECT MAX(id) FROM codeTrack";
 var maxId = SqlDriver.executeSql(sqlIn, "r");
 CodingSession currSession;
+
 if (maxId[0] == "")
 {
-    currSession = new CodingSession(1, null, null, null);
+    maxId[0] = "1";
 }
-else
-{
-    currSession = new CodingSession(Convert.ToInt32(maxId[0]), null, null, null);
-}
+currSession = new CodingSession(Convert.ToInt32(maxId[0]), null, null, null);
 List<string> mainMenu = new List<string>()
     {
         "Type 0 to close the application",
