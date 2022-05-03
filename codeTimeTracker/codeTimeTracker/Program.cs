@@ -103,7 +103,8 @@ while (consoleInput != 0)
             consoleInput = 900;
             break;
         case 6:
-            SqlDriver.createTable({currSession,  maxId})
+            SqlDriver.createTable(new Dictionary<int, CodingSession>() {{ Convert.ToInt32(maxId[0]), currSession }}, "Current Session");
+            break;
     }
 }
 
