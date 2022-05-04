@@ -50,12 +50,13 @@ namespace flashcards
         //never initalize menu to negative numbers
         {
             int userInput = 900;
-            Console.WriteLine(header+"\n\n");
+            Console.WriteLine("\n"+header+"\n");
+            Console.WriteLine("------------------\n");
             foreach (string option in menue)
             {
-                Console.WriteLine(option);
+                Console.WriteLine(" "+option);
             }
-            
+            Console.WriteLine("\n------------------");
             Console.WriteLine("\nInput your selection \nOr 0 to exit");
             while (!(userInput >= 0 && userInput <= menue.Count))
             {
@@ -80,7 +81,7 @@ namespace flashcards
                         }
                     }
                 }
-                if (userInput > menue.Count - 1 || userInput<0)
+                if (userInput > (menue.Count-1)  || userInput<0)
                 {
                     Console.WriteLine("Invalid Input. Try again:");
                 }
