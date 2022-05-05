@@ -9,45 +9,14 @@ namespace flashcards
 {
     internal class UserInput
     {
+        //Design
         public static void cwWrap(string sOut)
         {
             Console.WriteLine("***************************\n");
             Console.WriteLine(sOut);
             Console.WriteLine("\n***************************\n");
         }
-        public static string rgxCheck(string pattern, string text)
-        {
-            Regex rgx = new Regex(pattern);
-            MatchCollection matches = rgx.Matches(text);
-            if (matches.Count > 0)
-            {
-                return matches[0].Value;
-            }
-            else
-            {
-                return null;
-            }
-        }
-        public static int idInp()
-        {
-            Console.WriteLine("Which Id would you like to select?");
-
-            string uOut = null;
-            while (uOut == null)
-            {
-                string uInp = Console.ReadLine();
-                uOut = rgxCheck(@"\d+", uInp);
-                if (uOut == null)
-                {
-                    Console.WriteLine("Invalid input. Please input a number");
-                }
-            }
-
-            return Convert.ToInt32(uOut);
-        }
-
         public static int menu(List<string> menue, string header)
-        //never initalize menu to negative numbers
         {
             int userInput = 900;
             Console.WriteLine("\n"+header+"\n");
@@ -88,6 +57,38 @@ namespace flashcards
             }
             
             return userInput;
+        }
+
+        //Inputs
+        public static int idInp()
+        {
+            Console.WriteLine("Which Id would you like to select?");
+
+            string uOut = null;
+            while (uOut == null)
+            {
+                string uInp = Console.ReadLine();
+                uOut = rgxCheck(@"\d+", uInp);
+                if (uOut == null)
+                {
+                    Console.WriteLine("Invalid input. Please input a number");
+                }
+            }
+
+            return Convert.ToInt32(uOut);
+        }
+        public static string rgxCheck(string pattern, string text)
+        {
+            Regex rgx = new Regex(pattern);
+            MatchCollection matches = rgx.Matches(text);
+            if (matches.Count > 0)
+            {
+                return matches[0].Value;
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

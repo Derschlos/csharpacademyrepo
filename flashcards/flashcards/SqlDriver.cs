@@ -41,7 +41,10 @@ namespace flashcards
                                     object[] row = new object[3];
                                     reader.GetValues(row);
                                     foreach (var val in row)
-                                        rowData.Add(Convert.ToString(val));
+                                        if (val != null)
+                                        {
+                                            rowData.Add(Convert.ToString(val));
+                                        }
                                 }
                                 break;
 
@@ -67,5 +70,46 @@ namespace flashcards
                             )", "w");
             //var a = SqlDriver.executeSql("select * from sysobjects where name='languages' and xtype='U'", "r");
         }
+        public static void createTable(List<String> data, string title)
+        {
+            //var tableData = new List<List<object>> { };
+            ////foreach (var ses in data)
+            ////{
+            //tableData.Add(data);
+            ////}
+            ConsoleTableBuilder.From(data)
+                            .WithTextAlignment(new Dictionary<int, TextAligntment> {
+                    { 0, TextAligntment.Center },
+                    { 1, TextAligntment.Center },
+                    { 2, TextAligntment.Center },
+                    { 3, TextAligntment.Center }
+                            })
+                            .WithMinLength(new Dictionary<int, int> {
+                    { 0, 5 },
+                    { 1, 25 },
+                    { 2, 25 },
+                    { 3, 10 },
+                            })
+
+                            .WithTitle(title.ToUpper(), ConsoleColor.DarkYellow, ConsoleColor.DarkRed)
+                            .WithCharMapDefinition(CharMapDefinition.FrameDoublePipDefinition)
+                            //.WithFormatter(3, (text) =>
+                            //{
+                            //    if (string.IsNullOrEmpty(text) || text.Trim().Length == 0)
+                            //    {
+                            //        return "0 h";
+                            //    }
+                            //    else
+                            //    {
+                            //        return text + " h";
+                            //    }
+                            //})
+                            .WithColumnFormatter(0, (text) => "ID")
+                            .WithColumnFormatter(1, (text) => "Start Date")
+                            .WithColumnFormatter(2, (text) => "End Date")
+                            .WithColumnFormatter(3, (text) => "Duration")
+                            .ExportAndWriteLine();
+        }
+
     }
 }
