@@ -58,6 +58,8 @@ namespace codeTimeTracker
         }
         public static void createTable(Dictionary<int, CodingSession> data, string title)
         {
+            List<string> rows = new List<string>()
+            { "ID", "Start Date","End Date","Duration"};
             var tableData = new List<List<object>> { };
             foreach (var ses in data)
             {
@@ -90,10 +92,11 @@ namespace codeTimeTracker
                                     return text + " h";
                                 }
                             })
-                            .WithColumnFormatter(0, (text) => "ID")
-                            .WithColumnFormatter(1, (text) => "Start Date")
-                            .WithColumnFormatter(2, (text) => "End Date")
-                            .WithColumnFormatter(3, (text) => "Duration")
+                            .WithColumn(rows)
+                            //.WithColumnFormatter(0, (text) => "ID")
+                            //.WithColumnFormatter(1, (text) => "Start Date")
+                            //.WithColumnFormatter(2, (text) => "End Date")
+                            //.WithColumnFormatter(3, (text) => "Duration")
                             .ExportAndWriteLine();
         }
 

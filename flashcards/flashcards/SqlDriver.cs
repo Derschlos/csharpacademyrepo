@@ -59,19 +59,25 @@ namespace flashcards
         {
             SqlDriver.executeSql(@"if not exists (select * from sysobjects where name='languages' and xtype='U') 
                             CREATE TABLE languages(
-                            id INTEGER PRIMARY KEY,
-                            name TEXT,
-                            langId INTEGER
+                            id INTEGER IDENTITY(1,1) PRIMARY KEY,
+                            name TEXT
                             )", "w");
             SqlDriver.executeSql(@"if not exists (select * from sysobjects where name='cards' and xtype='U') 
                             CREATE TABLE cards(
-                            id INTEGER PRIMARY KEY,
-                            name TEXT
+                            id INTEGER IDENTITY(1,1) PRIMARY KEY,
+                            front TEXT,
+                            back TEXT,
+                            langId INTEGER
                             )", "w");
             //var a = SqlDriver.executeSql("select * from sysobjects where name='languages' and xtype='U'", "r");
         }
-        public static void createTable(List<String> data, string title)
+        public static void createTable(List<string> data, string title, List<string> headers)
         {
+            if (data.Count() == 0)
+            {
+                Console.WriteLine("No Data found");
+                return;
+            }
             //var tableData = new List<List<object>> { };
             ////foreach (var ses in data)
             ////{
@@ -104,12 +110,22 @@ namespace flashcards
                             //        return text + " h";
                             //    }
                             //})
-                            .WithColumnFormatter(0, (text) => "ID")
-                            .WithColumnFormatter(1, (text) => "Start Date")
-                            .WithColumnFormatter(2, (text) => "End Date")
-                            .WithColumnFormatter(3, (text) => "Duration")
+                            .WithColumn(headers)
+                            //.WithColumnFormatter(0, (text) => "ID")
+                            //.WithColumnFormatter(1, (text) => "Start Date")
+                            //.WithColumnFormatter(2, (text) => "End Date")
+                            //.WithColumnFormatter(3, (text) => "Duration")
                             .ExportAndWriteLine();
         }
+        public static Dictionary <int, Card> allCardsById(int langId)
+        {
+            Dictionary<int, Card> iddict = new Dictionary<int, Card>();
+            var sqlIn = $@"SELECT id FROM cards WHERE langId = {langId}";
+            var sqlOut = executeSql(sqlIn, "r");
+            for (int i = 0; i< sqlOut.Count; i++ )
+            {
 
+            }
+        }
     }
 }

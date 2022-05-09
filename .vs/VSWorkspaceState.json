@@ -1,6 +1,11 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\flashcards",
+    "\\flashcards\\flashcards",
+    "\\habit tracker",
+    "\\habit tracker\\habit tracker"
   ],
+  "SelectedNode": "\\flashcards\\flashcards\\SqlDriver.cs",
   "PreviewInSolutionExplorer": false
 }
