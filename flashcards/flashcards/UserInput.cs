@@ -19,15 +19,17 @@ namespace flashcards
         public static int menu(List<string> menue, string header)
         {
             int userInput = 900;
+            var paddedMenue = new List<string>(menue);
             Console.WriteLine("\n"+header+"\n");
             Console.WriteLine("------------------\n");
-            foreach (string option in menue)
+            foreach (string option in paddedMenue)
             {
                 Console.WriteLine(" "+option);
             }
             Console.WriteLine("\n------------------");
             Console.WriteLine("\nInput your selection \nOr 0 to exit");
-            while (!(userInput >= 0 && userInput <= menue.Count))
+            paddedMenue.Insert(0, " ");
+            while (!(userInput >= 0 && userInput < paddedMenue.Count))
             {
                 string input = Console.ReadLine();
                 try
@@ -36,21 +38,21 @@ namespace flashcards
                 }
                 catch (Exception)
                 {
-                    userInput = menue.IndexOf(input);
+                    userInput = paddedMenue.IndexOf(input);
                     if (userInput == -1)
                     {
-                        foreach (string option in menue)
+                        foreach (string option in paddedMenue.Skip(1))
                         {
                             if (option.Substring(0, 5).Contains(input))
                             {
-                                userInput = menue.IndexOf(option);
+                                userInput = paddedMenue.IndexOf(option);
                                 break;
                             }
                             userInput = 9999;
                         }
                     }
                 }
-                if (userInput > (menue.Count-1)  || userInput<0)
+                if (userInput > (paddedMenue.Count-1)  || userInput<0)
                 {
                     Console.WriteLine("Invalid Input. Try again:");
                 }

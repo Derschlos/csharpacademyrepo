@@ -71,7 +71,7 @@ namespace flashcards
                             )", "w");
             //var a = SqlDriver.executeSql("select * from sysobjects where name='languages' and xtype='U'", "r");
         }
-        public static void createTable(List<string> data, string title, List<string> headers)
+        public static void createTable(List<List<object>> data, string title, List<string> headers)
         {
             if (data.Count() == 0)
             {
@@ -79,53 +79,75 @@ namespace flashcards
                 return;
             }
             //var tableData = new List<List<object>> { };
-            ////foreach (var ses in data)
-            ////{
-            //tableData.Add(data);
-            ////}
+            //foreach (var ses in data)
+            //{
+            //    tableData.Add(ses);
+            //}
             ConsoleTableBuilder.From(data)
                             .WithTextAlignment(new Dictionary<int, TextAligntment> {
-                    { 0, TextAligntment.Center },
-                    { 1, TextAligntment.Center },
-                    { 2, TextAligntment.Center },
-                    { 3, TextAligntment.Center }
+                                { 0, TextAligntment.Center },
+                                { 1, TextAligntment.Center },
+                                { 2, TextAligntment.Center },
+                                {3, TextAligntment.Center },
                             })
                             .WithMinLength(new Dictionary<int, int> {
-                    { 0, 5 },
-                    { 1, 25 },
-                    { 2, 25 },
-                    { 3, 10 },
-                            })
+                                { 0, 5 },
+                                { 1, 25 },
+                                { 2, 25 }, 
+                                { 3, 25 },
 
+                            })
                             .WithTitle(title.ToUpper(), ConsoleColor.DarkYellow, ConsoleColor.DarkRed)
                             .WithCharMapDefinition(CharMapDefinition.FrameDoublePipDefinition)
-                            //.WithFormatter(3, (text) =>
-                            //{
-                            //    if (string.IsNullOrEmpty(text) || text.Trim().Length == 0)
-                            //    {
-                            //        return "0 h";
-                            //    }
-                            //    else
-                            //    {
-                            //        return text + " h";
-                            //    }
-                            //})
                             .WithColumn(headers)
-                            //.WithColumnFormatter(0, (text) => "ID")
-                            //.WithColumnFormatter(1, (text) => "Start Date")
-                            //.WithColumnFormatter(2, (text) => "End Date")
-                            //.WithColumnFormatter(3, (text) => "Duration")
                             .ExportAndWriteLine();
         }
-        public static Dictionary <int, Card> allCardsById(int langId)
+        public static Dictionary<int, Languages> getAllLanguages()
         {
-            Dictionary<int, Card> iddict = new Dictionary<int, Card>();
+            Dictionary<int, Languages> langs = new Dictionary<int, Languages>();
+            var langIds = SqlDriver.executeSql("SELECT id FROM languages", "r");
+            foreach (var langId in langIds)
+            {
+                var id = Convert.ToInt16(langId);
+                langs.Add(id, new Languages(id));
+            }
+            return langs;
+        }
+
+        public static List<string> allCardsId(int langId)
+        {
             var sqlIn = $@"SELECT id FROM cards WHERE langId = {langId}";
             var sqlOut = executeSql(sqlIn, "r");
-            for (int i = 0; i< sqlOut.Count; i++ )
+            return sqlOut;
+        }
+        public static List<string> cardContent(int id)
+        {
+            var sqlIn = $@"SELECT front, back FROM cards WHERE id = {id}";
+            var sqlOut = executeSql(sqlIn, "r");
+            return sqlOut;
+        }
+        public static string loadLangName(int id)
+        {
+            var sqlIn = $"SELECT name FROM languages WHERE id = {id} ";
+            try
             {
-
+                return executeSql(sqlIn, "r")[0];
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Language loading faulty. Could not find id {id} in the databank");
+                return "No Name";
+            }
+        }
+        public static void insertLanguage()
+        {
+            var sql = "INSERT INTO languages (name) VALUES ('Frensh')";
+            executeSql(sql, "w");
+        }
+        public static void insertCard()
+        {
+            var sql = @$"INSERT INTO cards (front, back,langId) VALUES ('Olla', 'Hallo', 2)";
+            executeSql(sql, "w");
         }
     }
 }
