@@ -8,7 +8,7 @@ namespace flashcards
 {
     internal class Languages
     {
-        public Languages(int id, string name = null)
+        public Languages(int id, string name = null!)
         {   
             _id = id;
             if (name == null)
@@ -55,8 +55,11 @@ namespace flashcards
         private void loadContent()
         {
             var content = SqlDriver.cardContent(Id);
-            Front = content[0].ToString();
-            Back = content[1].ToString();
+            if (content.Count > 0)
+            {
+                Front = content[0].ToString();
+                Back = content[1].ToString();
+            }
         }
         
     }

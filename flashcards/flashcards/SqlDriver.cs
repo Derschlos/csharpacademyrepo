@@ -75,7 +75,7 @@ namespace flashcards
         {
             if (data.Count() == 0)
             {
-                Console.WriteLine("No Data found");
+                Console.WriteLine($"No Data found for \"{title}\"");
                 return;
             }
             //var tableData = new List<List<object>> { };
