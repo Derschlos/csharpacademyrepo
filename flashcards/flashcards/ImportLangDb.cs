@@ -7,13 +7,15 @@ using Microsoft.Data.Sqlite;
 
 namespace flashcards
 {
-    internal class ReadLangDb
+    internal class ImportLangDb
     {
         private string _dbName;
+        public string Name { get; }
         public Dictionary<int, Card> cards = new Dictionary<int, Card>();
-        public ReadLangDb(string name)
+        public ImportLangDb(string name)
         {
             _dbName = name;
+            Name = name.Split(".")[0];
             if (File.Exists(_dbName))
             {
                 cards = getCards(_dbName);
@@ -68,6 +70,7 @@ namespace flashcards
             }
             return cardsOut;
         }
+
     }
     
 }

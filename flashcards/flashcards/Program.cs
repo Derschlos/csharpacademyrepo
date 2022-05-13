@@ -13,6 +13,7 @@ namespace flashcards
 
         static void Main(string[] args)
         {
+
             static List<string> createLangSelectMenu(Dictionary<int, Languages> langs)
             {
                 List<string> langSelectMenu = new List<string>();
@@ -26,38 +27,38 @@ namespace flashcards
                 return langSelectMenu;
             }
             List<string> langHeaders = new List<string>()
-            {
-                "Name",
-                "# of Cards"
-            };
+                {
+                    "Name",
+                    "# of Cards"
+                };
             List<string> mainMenu = new List<string>()
-            {
-            "L or 1 to Manage Languages",
-            "F or 2 to Manage Flashcards",
-            "B or 3 to Beginn a Study session",
-            "D or 4 to view study session Data"
-            };
+                {
+                "L or 1 to Manage Languages",
+                "F or 2 to Manage Flashcards",
+                "B or 3 to Beginn a Study session",
+                "D or 4 to view study session Data"
+                };
             List<string> manageLangMenu = new List<string>()
-            {
-                "A or 1 to Add a new language",
-                "D or 2 to Delete a language",
-                "R or 3 to Rename a language",
-                "I or 4 to Import a Language from a prepacked file"
-            };
+                {
+                    "A or 1 to Add a new language",
+                    "D or 2 to Delete a language",
+                    "R or 3 to Rename a language",
+                    "I or 4 to Import a Language from a prepacked file"
+                };
             List<string> manageCardsMenu = new List<string>()
-            {   
-                "A or 1 to view all Cards",
-                "N or 2 to create a new Card",
-                "E or 3 to edit a Card",
-                "D or 4 to delete a Card"
-            };
+                {
+                    "A or 1 to view all Cards",
+                    "N or 2 to create a new Card",
+                    "E or 3 to edit a Card",
+                    "D or 4 to delete a Card"
+                };
             //ReadLangDb a = new ReadLangDb("French");
             //Console.WriteLine(a.cards.Count());
             //foreach (var card in a.cards)
             //{
             //    Console.WriteLine(card.Value.Front);
             //}
-           
+
             SqlDriver.initialize();
             var langs = SqlDriver.getAllLanguages();
             Languages currentLanguage;
@@ -87,12 +88,12 @@ namespace flashcards
                                     break;
                                 case 3:
                                     break;
-                                case 4:
+                                case 4: //Import a Language
                                     string[] files = Directory.GetFiles(@".\", "*.prepackedlang");
                                     List<string> prepakedFileMenu = new List<string>();
                                     for (int i = 0; i < files.Length; i++)
                                     {
-                                        prepakedFileMenu.Add($"{Path.GetFileName(files[i])[0..2]} or {i+1} to access {Path.GetFileName(files[i])}");
+                                        prepakedFileMenu.Add($"{Path.GetFileName(files[i])[0..2]} or {i + 1} to access {Path.GetFileName(files[i])}");
                                     }
                                     int fselect = UserInput.menu(prepakedFileMenu, "select a File");
                                     if (fselect <= 0)
@@ -100,6 +101,8 @@ namespace flashcards
                                         break;
                                     }
                                     Console.WriteLine(files[fselect - 1]);
+                                    var importedLang = new ImportLangDb(files[fselect - 1][2..]);
+                                    SqlDriver.importDbToServer(importedLang);
                                     break;
 
                             }

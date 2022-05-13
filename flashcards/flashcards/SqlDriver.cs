@@ -139,15 +139,32 @@ namespace flashcards
                 return "No Name";
             }
         }
-        public static void insertLanguage()
+        public static void insertLanguage(string langName)
         {
-            var sql = "INSERT INTO languages (name) VALUES ('Frensh')";
+            var sql = $"INSERT INTO languages (name) VALUES ('{langName}')";
             executeSql(sql, "w");
         }
-        public static void insertCard()
+        public static void insertCard(Card card, int langId)
         {
-            var sql = @$"INSERT INTO cards (front, back,langId) VALUES ('Olla', 'Hallo', 2)";
+            var sql = @$"INSERT INTO cards (front, back,langId) VALUES ('{card.Front}', '{card.Back}', {langId})";
             executeSql(sql, "w");
+        }
+        public static void importDbToServer(ImportLangDb import)
+        {
+            var sqlIn = $"SELECT * FROM languages WHERE name = '{Convert.ToString(import.Name)}'";
+            var sqlOut = executeSql(sqlIn, "r");
+            if (sqlOut.Count != 0)
+            { return; };
+            sqlIn = $"INSERT INTO languages (name) VALUES ('{import.Name})";
+            sqlOut = executeSql( sqlIn, "w");
+            sqlIn = $"SELECT id FROM languages WHERE name = '{import.Name}'";
+            string langId = executeSql(sqlIn, "r")[0];
+            foreach (var cardIndex in import.cards)
+            {
+                Card card = cardIndex.Value;
+                sqlIn = $"INSERT INTO cards (front, back, langId) VALUES ('{card.Front}', '{card.Back}', '{langId}')";
+                sqlOut = executeSql(sqlIn, "w");
+            }
         }
     }
 }
