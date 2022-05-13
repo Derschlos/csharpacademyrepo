@@ -60,13 +60,13 @@ namespace flashcards
             SqlDriver.executeSql(@"if not exists (select * from sysobjects where name='languages' and xtype='U') 
                             CREATE TABLE languages(
                             id INTEGER IDENTITY(1,1) PRIMARY KEY,
-                            name TEXT
+                            name VARCHAR(MAX)
                             )", "w");
             SqlDriver.executeSql(@"if not exists (select * from sysobjects where name='cards' and xtype='U') 
                             CREATE TABLE cards(
                             id INTEGER IDENTITY(1,1) PRIMARY KEY,
-                            front TEXT,
-                            back TEXT,
+                            front VARCHAR(MAX),
+                            back VARCHAR(MAX),
                             langId INTEGER
                             )", "w");
             //var a = SqlDriver.executeSql("select * from sysobjects where name='languages' and xtype='U'", "r");
@@ -151,17 +151,21 @@ namespace flashcards
         }
         public static void importDbToServer(ImportLangDb import)
         {
-            var sqlIn = $"SELECT * FROM languages WHERE name = '{Convert.ToString(import.Name)}'";
+            var sqlIn = $"SELECT * FROM languages WHERE name = '{import.Name}'";
             var sqlOut = executeSql(sqlIn, "r");
             if (sqlOut.Count != 0)
             { return; };
-            sqlIn = $"INSERT INTO languages (name) VALUES ('{import.Name})";
+            sqlIn = $"INSERT INTO languages (name) VALUES ('{import.Name}')";
             sqlOut = executeSql( sqlIn, "w");
             sqlIn = $"SELECT id FROM languages WHERE name = '{import.Name}'";
             string langId = executeSql(sqlIn, "r")[0];
             foreach (var cardIndex in import.cards)
             {
                 Card card = cardIndex.Value;
+                if (card.Front.Contains("'")|| card.Back.Contains("'"))
+                {
+
+                }
                 sqlIn = $"INSERT INTO cards (front, back, langId) VALUES ('{card.Front}', '{card.Back}', '{langId}')";
                 sqlOut = executeSql(sqlIn, "w");
             }
