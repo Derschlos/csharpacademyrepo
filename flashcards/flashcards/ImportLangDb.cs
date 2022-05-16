@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.Data.Sqlite;
 
@@ -63,8 +64,9 @@ namespace flashcards
                 for (int i = 0; i<(rows.Count-1); i+=2)
                 {
                     cardsOut.Add(j, new Card(i));
-                    cardsOut[j].Front = rows[i];
-                    cardsOut[j].Back = rows[i+1];
+                    Console.WriteLine(rows[i] +" " + rows[i + 1]);
+                    cardsOut[j].Front = Regex.Replace(rows[i], "'","''");
+                    cardsOut[j].Back = Regex.Replace(rows[i+1], "'", "''");
                     j ++;
                 }
             }

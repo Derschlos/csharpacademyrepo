@@ -60,14 +60,14 @@ namespace flashcards
             SqlDriver.executeSql(@"if not exists (select * from sysobjects where name='languages' and xtype='U') 
                             CREATE TABLE languages(
                             id INTEGER IDENTITY(1,1) PRIMARY KEY,
-                            name TEXT
+                            name VARCHAR(MAX)
                             )", "w");
             SqlDriver.executeSql(@"if not exists (select * from sysobjects where name='cards' and xtype='U') 
                             CREATE TABLE cards(
                             id INTEGER IDENTITY(1,1) PRIMARY KEY,
-                            front TEXT,
-                            back TEXT,
-                            langId INTEGER
+                            front VARCHAR(MAX),
+                            back VARCHAR(MAX),
+                            langId VARCHAR(MAX)
                             )", "w");
             //var a = SqlDriver.executeSql("select * from sysobjects where name='languages' and xtype='U'", "r");
         }
@@ -155,7 +155,7 @@ namespace flashcards
             var sqlOut = executeSql(sqlIn, "r");
             if (sqlOut.Count != 0)
             { return; };
-            sqlIn = $"INSERT INTO languages (name) VALUES ('{import.Name})";
+            sqlIn = $"INSERT INTO languages (name) VALUES ('{import.Name}')";
             sqlOut = executeSql( sqlIn, "w");
             sqlIn = $"SELECT id FROM languages WHERE name = '{import.Name}'";
             string langId = executeSql(sqlIn, "r")[0];

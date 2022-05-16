@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\davidleonschmidt\\Desktop\\Progs\\thecsharpacad\\flashcards\\flashcards\\flashcards.csproj": {}
+    "C:\\Users\\David\\Desktop\\Programieren\\cSharpAcademy\\flashcards\\flashcards\\flashcards.csproj": {}
   },
   "projects": {
-    "C:\\Users\\davidleonschmidt\\Desktop\\Progs\\thecsharpacad\\flashcards\\flashcards\\flashcards.csproj": {
+    "C:\\Users\\David\\Desktop\\Programieren\\cSharpAcademy\\flashcards\\flashcards\\flashcards.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\davidleonschmidt\\Desktop\\Progs\\thecsharpacad\\flashcards\\flashcards\\flashcards.csproj",
+        "projectUniqueName": "C:\\Users\\David\\Desktop\\Programieren\\cSharpAcademy\\flashcards\\flashcards\\flashcards.csproj",
         "projectName": "flashcards",
-        "projectPath": "C:\\Users\\davidleonschmidt\\Desktop\\Progs\\thecsharpacad\\flashcards\\flashcards\\flashcards.csproj",
-        "packagesPath": "C:\\Users\\davidleonschmidt\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\davidleonschmidt\\Desktop\\Progs\\thecsharpacad\\flashcards\\flashcards\\obj\\",
+        "projectPath": "C:\\Users\\David\\Desktop\\Programieren\\cSharpAcademy\\flashcards\\flashcards\\flashcards.csproj",
+        "packagesPath": "C:\\Users\\David\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\David\\Desktop\\Programieren\\cSharpAcademy\\flashcards\\flashcards\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\davidleonschmidt\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\David\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -76,7 +76,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\PROGRAM FILES\\DOTNET\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     }

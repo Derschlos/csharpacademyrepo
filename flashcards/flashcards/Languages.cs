@@ -62,6 +62,7 @@ namespace flashcards
                 Back = content[1].ToString();
             }
         }
+        //private void validateText
         
     }
 

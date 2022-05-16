@@ -14,6 +14,11 @@ namespace flashcards
                                                                 {ConfigurationManager.AppSettings.Get("dbName")};
                                                              Integrated Security={ConfigurationManager.AppSettings.Get("Integrated Security")}
                                                              ");
+
+        //static void ImportDbProcedure(ImportLangDb import)
+        //{
+        //    string procedure = $@"CREATE PROCEDURE importDb(@langName VARCHAR(MAX), @langId INTEGER "
+        //}
         //con.open();
         //    CREATE PROCEDURE RegionUpdate(@RegionID INTEGER,
         //    @RegionDescription NCHAR(50)) AS

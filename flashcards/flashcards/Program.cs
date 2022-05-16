@@ -5,6 +5,7 @@ using flashcards;
 using System.IO;
 
 
+
 namespace flashcards
 {
 
@@ -71,6 +72,8 @@ namespace flashcards
                 {
                     case 1: //manage Langs
                         Console.Clear();
+                        tableData = new List<List<object>>();
+                        langs = SqlDriver.getAllLanguages();
                         foreach (var lang in langs.Values)
                         {
                             tableData.Add(lang.expData());
@@ -130,6 +133,7 @@ namespace flashcards
                         }
                         break;
                     case 3:
+
                         break;
                     case 4:
                         Console.WriteLine("d");
