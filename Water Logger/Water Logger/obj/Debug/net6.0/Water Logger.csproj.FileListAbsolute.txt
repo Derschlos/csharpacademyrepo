@@ -1,0 +1,26 @@
+C:\Users\davidleonschmidt\Desktop\Progs\thecsharpacad\Water Logger\Water Logger\bin\Debug\net6.0\appsettings.Development.json
+C:\Users\davidleonschmidt\Desktop\Progs\thecsharpacad\Water Logger\Water Logger\bin\Debug\net6.0\appsettings.json
+C:\Users\davidleonschmidt\Desktop\Progs\thecsharpacad\Water Logger\Water Logger\bin\Debug\net6.0\Water Logger.staticwebassets.runtime.json
+C:\Users\davidleonschmidt\Desktop\Progs\thecsharpacad\Water Logger\Water Logger\bin\Debug\net6.0\Water Logger.exe
+C:\Users\davidleonschmidt\Desktop\Progs\thecsharpacad\Water Logger\Water Logger\bin\Debug\net6.0\Water Logger.deps.json
+C:\Users\davidleonschmidt\Desktop\Progs\thecsharpacad\Water Logger\Water Logger\bin\Debug\net6.0\Water Logger.runtimeconfig.json
+C:\Users\davidleonschmidt\Desktop\Progs\thecsharpacad\Water Logger\Water Logger\bin\Debug\net6.0\Water Logger.dll
+C:\Users\davidleonschmidt\Desktop\Progs\thecsharpacad\Water Logger\Water Logger\bin\Debug\net6.0\Water Logger.pdb
+C:\Users\davidleonschmidt\Desktop\Progs\thecsharpacad\Water Logger\Water Logger\obj\Debug\net6.0\Water Logger.csproj.AssemblyReference.cache
+C:\Users\davidleonschmidt\Desktop\Progs\thecsharpacad\Water Logger\Water Logger\obj\Debug\net6.0\Water Logger.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\davidleonschmidt\Desktop\Progs\thecsharpacad\Water Logger\Water Logger\obj\Debug\net6.0\Water Logger.AssemblyInfoInputs.cache
+C:\Users\davidleonschmidt\Desktop\Progs\thecsharpacad\Water Logger\Water Logger\obj\Debug\net6.0\Water Logger.AssemblyInfo.cs
+C:\Users\davidleonschmidt\Desktop\Progs\thecsharpacad\Water Logger\Water Logger\obj\Debug\net6.0\Water Logger.csproj.CoreCompileInputs.cache
+C:\Users\davidleonschmidt\Desktop\Progs\thecsharpacad\Water Logger\Water Logger\obj\Debug\net6.0\Water Logger.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\davidleonschmidt\Desktop\Progs\thecsharpacad\Water Logger\Water Logger\obj\Debug\net6.0\Water Logger.RazorAssemblyInfo.cache
+C:\Users\davidleonschmidt\Desktop\Progs\thecsharpacad\Water Logger\Water Logger\obj\Debug\net6.0\Water Logger.RazorAssemblyInfo.cs
+C:\Users\davidleonschmidt\Desktop\Progs\thecsharpacad\Water Logger\Water Logger\obj\Debug\net6.0\staticwebassets.build.json
+C:\Users\davidleonschmidt\Desktop\Progs\thecsharpacad\Water Logger\Water Logger\obj\Debug\net6.0\staticwebassets.development.json
+C:\Users\davidleonschmidt\Desktop\Progs\thecsharpacad\Water Logger\Water Logger\obj\Debug\net6.0\scopedcss\Pages\Shared\_Layout.cshtml.rz.scp.css
+C:\Users\davidleonschmidt\Desktop\Progs\thecsharpacad\Water Logger\Water Logger\obj\Debug\net6.0\scopedcss\bundle\Water Logger.styles.css
+C:\Users\davidleonschmidt\Desktop\Progs\thecsharpacad\Water Logger\Water Logger\obj\Debug\net6.0\scopedcss\projectbundle\Water Logger.bundle.scp.css
+C:\Users\davidleonschmidt\Desktop\Progs\thecsharpacad\Water Logger\Water Logger\obj\Debug\net6.0\Water Logger.dll
+C:\Users\davidleonschmidt\Desktop\Progs\thecsharpacad\Water Logger\Water Logger\obj\Debug\net6.0\refint\Water Logger.dll
+C:\Users\davidleonschmidt\Desktop\Progs\thecsharpacad\Water Logger\Water Logger\obj\Debug\net6.0\Water Logger.pdb
+C:\Users\davidleonschmidt\Desktop\Progs\thecsharpacad\Water Logger\Water Logger\obj\Debug\net6.0\Water Logger.genruntimeconfig.cache
+C:\Users\davidleonschmidt\Desktop\Progs\thecsharpacad\Water Logger\Water Logger\obj\Debug\net6.0\ref\Water Logger.dll
