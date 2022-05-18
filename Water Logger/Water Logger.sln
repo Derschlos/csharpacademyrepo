@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32328.378
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Water Logger", "Water Logger\Water Logger.csproj", "{6D7B334C-6416-4CE0-9D21-2431EDEA0C62}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Water Logger", "Water Logger\Water Logger.csproj", "{6D7B334C-6416-4CE0-9D21-2431EDEA0C62}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,8 +1,16 @@
 {
   "version": 2,
-  "dgSpecHash": "QRU9kmL/RLBYvLbomMOwpPIBVGsaj4tls0OjS9sJ5PRXlI7hI+aknOurbFtU4ixnsyY8uR+Y2Siu7qFTECGR+A==",
+  "dgSpecHash": "qJ00zTNfksq2LvaTntPhRXFFtc2cc4W9CjS4H8VVcJO9dffeImBqcu3nh28NCw/RKwyZS8U8nK+jyg5vd7czqw==",
   "success": true,
   "projectFilePath": "C:\\Users\\davidleonschmidt\\Desktop\\Progs\\thecsharpacad\\Water Logger\\Water Logger\\Water Logger.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\davidleonschmidt\\.nuget\\packages\\microsoft.data.sqlite\\6.0.5\\microsoft.data.sqlite.6.0.5.nupkg.sha512",
+    "C:\\Users\\davidleonschmidt\\.nuget\\packages\\microsoft.data.sqlite.core\\6.0.5\\microsoft.data.sqlite.core.6.0.5.nupkg.sha512",
+    "C:\\Users\\davidleonschmidt\\.nuget\\packages\\sqlitepclraw.bundle_e_sqlite3\\2.0.6\\sqlitepclraw.bundle_e_sqlite3.2.0.6.nupkg.sha512",
+    "C:\\Users\\davidleonschmidt\\.nuget\\packages\\sqlitepclraw.core\\2.0.6\\sqlitepclraw.core.2.0.6.nupkg.sha512",
+    "C:\\Users\\davidleonschmidt\\.nuget\\packages\\sqlitepclraw.lib.e_sqlite3\\2.0.6\\sqlitepclraw.lib.e_sqlite3.2.0.6.nupkg.sha512",
+    "C:\\Users\\davidleonschmidt\\.nuget\\packages\\sqlitepclraw.provider.e_sqlite3\\2.0.6\\sqlitepclraw.provider.e_sqlite3.2.0.6.nupkg.sha512",
+    "C:\\Users\\davidleonschmidt\\.nuget\\packages\\system.memory\\4.5.3\\system.memory.4.5.3.nupkg.sha512"
+  ],
   "logs": []
 }
