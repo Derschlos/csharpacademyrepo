@@ -7,6 +7,15 @@ html {
     font-size: 16px;
   }
 }
+.form-group {
+    float: left;
+    /*border: 1px solid red;*/
+}
+
+.form-group {
+    clear: right;
+    margin-left: 10px;
+}
 
 html {
   position: relative;

@@ -1,0 +1,26 @@
+c:\publish\myApp\Water Logger.exe
+c:\publish\myApp\appsettings.Development.json
+c:\publish\myApp\appsettings.json
+c:\publish\myApp\Water Logger.dll
+c:\publish\myApp\Water Logger.deps.json
+c:\publish\myApp\Water Logger.runtimeconfig.json
+c:\publish\myApp\Water Logger.pdb
+c:\publish\myApp\Microsoft.Data.Sqlite.dll
+c:\publish\myApp\SQLitePCLRaw.batteries_v2.dll
+c:\publish\myApp\SQLitePCLRaw.core.dll
+c:\publish\myApp\SQLitePCLRaw.provider.e_sqlite3.dll
+c:\publish\myApp\runtimes\alpine-x64\native\libe_sqlite3.so
+c:\publish\myApp\runtimes\linux-arm\native\libe_sqlite3.so
+c:\publish\myApp\runtimes\linux-arm64\native\libe_sqlite3.so
+c:\publish\myApp\runtimes\linux-armel\native\libe_sqlite3.so
+c:\publish\myApp\runtimes\linux-mips64\native\libe_sqlite3.so
+c:\publish\myApp\runtimes\linux-musl-x64\native\libe_sqlite3.so
+c:\publish\myApp\runtimes\linux-s390x\native\libe_sqlite3.so
+c:\publish\myApp\runtimes\linux-x64\native\libe_sqlite3.so
+c:\publish\myApp\runtimes\linux-x86\native\libe_sqlite3.so
+c:\publish\myApp\runtimes\osx-arm64\native\libe_sqlite3.dylib
+c:\publish\myApp\runtimes\osx-x64\native\libe_sqlite3.dylib
+c:\publish\myApp\runtimes\win-arm\native\e_sqlite3.dll
+c:\publish\myApp\runtimes\win-arm64\native\e_sqlite3.dll
+c:\publish\myApp\runtimes\win-x64\native\e_sqlite3.dll
+c:\publish\myApp\runtimes\win-x86\native\e_sqlite3.dll
