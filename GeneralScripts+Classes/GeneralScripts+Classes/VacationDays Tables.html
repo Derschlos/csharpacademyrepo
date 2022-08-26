@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <!--Two Tables showing the taken and available days
+        Data comes from the "stats" Model queryed from a dbo-->
+    <div class="row">
+        <div class="form-group">
+            @*<div class="tab-group">
+                *@
+                <table id="ansprueche">
+                    <tr>
+                        <th>Anspruch</th>
+                        <th>Tage</th>
+                    </tr>
+                    <tr>
+                        <td>Urlaubsanspruch Vorjahr:</td>
+                        <input type="number" asp-for="@Model.stats.transferedVacationDays" hidden />
+                        <td><b>@Model.stats.transferedVacationDays @Model.sharedFun.checkTage(@Model.stats.transferedVacationDays)</b></td>
+                    </tr>
+                    <tr>
+                        <td>Urlaubsanspruch laufendes Jahr:</td>
+                        <input type="number" asp-for="@Model.stats.baseYearlyVacation" hidden />
+                        <td><b>@Model.stats.baseYearlyVacation @Model.sharedFun.checkTage(@Model.stats.baseYearlyVacation)</b> </td>
+                    </tr>
+                    <tr>
+                        <td>Zusatzurlaub nach SGB: </td>
+                        <input type="number" asp-for="@Model.stats.addedVacationDays" hidden />
+                        <td><b>@Model.stats.addedVacationDays @Model.sharedFun.checkTage(@Model.stats.addedVacationDays)</b> </td>
+                    </tr>
+                    @*
+                    <tr>
+                        <td>Überstunden:</td>
+                        <td><b>0 Tage</b></td>
+                    </tr>*@
+                    <tr class="sum">
+                        <td>Gesammter Anspruch zum 01.01.</td>
+                        <input type="number" asp-for="@Model.stats.allVacationTime" hidden />
+                        <td><b>@Model.stats.allVacationTime @Model.sharedFun.checkTage(@Model.stats.allVacationTime)</b></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="form-group">
+                <table id="ansprueche">
+                    <tr>
+                        <th>Dieser Antrag:</th>
+                        <th>Tage</th>
+                    </tr>
+                    <tr>
+                        <td>Bereits beantragter/genehmigter Urlaub:</td>
+                        <input type="number" asp-for="@Model.stats.takenVacation" hidden />
+                        <td><b>@Model.stats.takenVacation @Model.sharedFun.checkTage(Model.stats.takenVacation)</b></td>
+                    </tr>
+                    <tr>
+                        <td>mit diesem antrag beantragte Urlaubstage:</td>
+                        <td id="vacationLength">0 Tage</td>
+                    </tr>
+                    <tr class="sum">
+                        <td>verbleibender Resturlaub:</td>
+                        <input type="number" asp-for="@Model.stats.availableDays" hidden />
+                        <td id="remainingDays"><b>@Model.stats.availableDays @Model.sharedFun.checkTage(Model.stats.availableDays)</b></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+</body>
+<script src="~/js/calcVacationLength.js"></script>
+</html>

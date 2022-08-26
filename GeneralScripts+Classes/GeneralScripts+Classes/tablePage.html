@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <!--simple Table with 2 buttons per row-->
+    <h4>Bewilligter Urlaub</h4>
+    <br />
+    <table id="ApprovedRecords" class="VacationTable">
+        <thead>
+            <tr>
+                <th>LfdId</th>
+                <th>
+                    Start
+                </th>
+                <th>
+                    Ende
+                </th>
+                <th>
+                    Länge
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var record in Model.ApprovedRecords)
+            {
+            <tr class="list-row">
+                <td>
+                    @Html.DisplayFor(modelItem => record.LfdId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => record.Start, "System.DateTime")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => record.Ende.Date,"System.DateTime")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => record.VacationLength)
+                </td>
+                <td id="VTableButtons">
+                    @*<a button type="button" class="btn btn-danger" asp-page="./Delete" asp-route-id="@record.Id">
+                        Delete
+                    </a>*@
+                    <a button type="button" class="btn btn-primary" asp-page="./Download" asp-route-id="@record.Id">
+                        Download
+                    </a>
+                </td>
+            </tr>
+            }
+
+        </tbody>
+    </table>
+</body>
+</html>

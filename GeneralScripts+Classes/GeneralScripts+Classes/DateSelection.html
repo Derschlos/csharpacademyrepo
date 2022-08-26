@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+
+    <form method="post">
+        <!--a simple form with 2 date selectors 
+            has a script call on the dates to calculate the business days from start->end -->
+        <div class="row">
+            <div class="col-2">
+                <div class="form-group">
+                    <label asp-for="antrag.LfdId" class="control-label">LfdId:</label>
+                    <input type="text" asp-for="antrag.LfdId" class="form-control" hidden />
+                    <label type="text" asp-for="antrag.LfdId"><b>@Model.antrag.LfdId</b></label>
+                    <span asp-validation-for="antrag.LfdId" class="text-danger"></span>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-3">
+                <div class="form-group" onchange="calcVacationLength(@Model.stats.availableDays)">
+                    <label asp-for="antrag.Start" class="control-label"></label>
+                    <input type="date" asp-for="antrag.Start" class="form-control" id="start" value="" />
+                    <span asp-validation-for="antrag.Start" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="form-group" onchange="calcVacationLength(@Model.stats.availableDays)">
+                    <label asp-for="antrag.Ende" class="control-label"></label>
+                    <input type="date" asp-for="antrag.Ende" class="form-control" id="ende" value="" />
+                    <span asp-validation-for="antrag.Ende" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="form-group">
+                    <input type="submit" value="Antrag einreichen" class="btn btn-success" id="submit" />
+                </div>
+            </div>
+        </div>
+        <hr></hr>
+
+
+
+
+</body>
+<script src="~/js/calcVacationLength.js"></script>
+</html>
